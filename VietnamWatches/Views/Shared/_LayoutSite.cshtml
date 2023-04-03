@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <!-- Favicon -->
+    <link href="~/Public/images/logo.png" rel="icon">
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link href="~/Public/assets/css/all.min.css" rel="stylesheet" />
+    <!-- owl carousel -->
+    <link href="~/Public/assets/css/owl.carousel.css" rel="stylesheet" />
+    <!-- bootstrap -->
+    <link href="~/Public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- magnific popup -->
+    <link href="~/Public/assets/css/magnific-popup.css" rel="stylesheet" />
+    <!-- animate css -->
+    <link href="~/Public/assets/css/animate.css" rel="stylesheet" />
+    <!-- mean menu css -->
+    <link href="~/Public/assets/css/meanmenu.min.css" rel="stylesheet" />
+    <!-- main style -->
+    <link href="~/Public/assets/css/main.css" rel="stylesheet" />
+    <!-- responsive -->
+    <link href="~/Public/assets/css/responsive.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.17/sweetalert2.min.js" integrity="sha512-Kyb4n9EVHqUml4QZsvtNk6NDNGO3+Ta1757DSJqpxe7uJlHX1dgpQ6Sk77OGoYA4zl7QXcOK1AlWf8P61lSLfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.17/sweetalert2.min.css" integrity="sha512-CJ5goVzT/8VLx0FE2KJwDxA7C6gVMkIGKDx31a84D7P4V3lOVJlGUhC2mEqmMHOFotYv4O0nqAOD0sEzsaLMBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Public/css/LayoutSite.css" rel="stylesheet" />
+    @RenderSection("header", required: false)
+</head>
+<body>
+
+    <!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="index.html">
+                                <img src="~/Public/images/logo.png" alt="">
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        @Html.Action("MainMenu", "Module")
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+
+
+    @RenderBody()
+
+
+    <!-- footer -->
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                @Html.Action("ConfigFooter", "Module")
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box pages">
+                        @Html.Action("MenuFooter", "Module")
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box subscribe">
+                        <h2 class="widget-title">Đăng kí thành viên</h2>
+                        <p>Đăng kí tại đây để cùng nhận thêm nhiều thông tin mới nhất từ cửa hàng.</p>
+                        <form action="#">
+                            <input type="email" placeholder="Email">
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end footer -->
+    <!-- copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <p><a href="https://www.facebook.com/ngoctoan2403/">Fb: Hồ Ngọc Toàn</a></p>
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end copyright -->
+    <!-- jquery -->
+    <script src="~/Public/assets/js/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap -->
+    <script src="~/Public/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- count down -->
+    <script src="~/Public/assets/js/jquery.countdown.js"></script>
+    <!-- isotope -->
+    <script src="~/Public/assets/js/jquery.isotope-3.0.6.min.js"></script>
+    <!-- waypoints -->
+    <script src="~/Public/assets/js/waypoints.js"></script>
+    <!-- owl carousel -->
+    <script src="~/Public/assets/js/owl.carousel.min.js"></script>
+    <!-- magnific popup -->
+    <script src="~/Public/assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- mean menu -->
+    <script src="~/Public/assets/js/jquery.meanmenu.min.js"></script>
+    <!-- sticker js -->
+    <script src="~/Public/assets/js/sticker.js"></script>
+    <script src="~/Public/assets/js/form-validate.js"></script>
+    <!-- main js -->
+    <script src="~/Public/assets/js/main.js"></script>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("footer", required: false)
+</body>
+</html>
+
+

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<MyClass.Models.Category>
+
+<h4 class="font-monospace mt-lg-3">Lọc theo danh mục</h4>
+<div class="product-filters">
+    <select class="select" id="categoryFilter">
+        <option value="all">Tất cả sản phẩm</option>
+        @foreach (var category in Model)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+
+    </select>
+
+    @*<ul style="text-align:left;">
+        <li class="active" data-filter="*">Tất cả sản phẩm</li>
+        @foreach (var category in Model)
+        {
+            <li data-filter="@category.Id">@category.Name</li>
+        }
+    </ul>*@
+</div>

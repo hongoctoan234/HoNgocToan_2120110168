@@ -1,0 +1,121 @@
+﻿@model MyClass.Models.Contact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div>
+    <hr />
+    <div class="dl-horizontal my-2 mx-3">
+        <h4>Chi tết - liên hệ</h4>
+        <div class="row">
+            <div class="col col-md-10">
+                <a href="@Url.Action("Index", "Order")" class="btn btn-sm btn-danger my-2"><i class="fas fa-arrow-circle-left"></i>  Về danh sách</a>
+            </div>
+        </div>
+        <hr />
+        <h5 class="font-monospace">Thông tin cơ bản liên hệ</h5>
+        <div class="container-fluid pt-2 px-2 row">
+            <div class="col-xl-6">
+                @Html.Partial("Message")
+                <table class="table table-bordered table-hover table-striped" id="myTable">
+                    <tr>
+                        <th>Tên trường</th>
+                        <th>Nội dung</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Id)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.FullName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Phone)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Title)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Title)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Detail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Detail)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.CreatedAt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.CreatedAt)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-6">
+
+                @using (Html.BeginForm("Edit", "Contact", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.CreatedAt)
+                    @Html.HiddenFor(model => model.CreatedBy)
+                    @Html.HiddenFor(model => model.Title)
+                    @Html.HiddenFor(model => model.FullName)
+                    @Html.HiddenFor(model => model.Email)
+                    @Html.HiddenFor(model => model.Phone)
+                    @Html.HiddenFor(model => model.Detail)
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Phản hồi ý kiến <span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.ReplayDetail, new { htmlAttributes = new { @class = "form-control form-control-full" } })
+                                @Html.ValidationMessageFor(model => model.ReplayDetail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-10 text-right">
+                        <button type="submit" value="Create" class="btn btn-success"><i class="fas fa-save"></i>   Phản hồi [Lưu]</button>
+                    </div>
+                }
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>
+

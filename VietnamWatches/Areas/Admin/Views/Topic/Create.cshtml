@@ -1,0 +1,95 @@
+﻿@model MyClass.Models.Topic
+
+@{
+    ViewBag.Title = "Thêm mới topic";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-horizontal my-2 mx-3">
+        <h4>Thêm mới - Topic</h4>
+        <div class="row">
+            <div class="col col-md-10">
+                <a href="@Url.Action("Index", "Topic")" class="btn btn-sm btn-danger my-2"><i class="fas fa-arrow-circle-left"></i>  Về danh sách</a>
+            </div>
+            <div class="col col-md-2 text-right">
+                <button type="submit" value="Create" class="btn btn-success"><i class="fas fa-save"></i>   Thêm [Lưu]</button>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Tên topic <span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Từ khoá <span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.MetaKey, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MetaKey, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Mô tả <span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.MetaDesc, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MetaDesc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+                    <div class="mb-3">
+                        <label>Danh mục cấp cha</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.ParentId, (SelectList)ViewBag.ListCat, "Cấp cha ", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label>Sắp xếp</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Orders, (SelectList)ViewBag.ListOrder, "Vị trí ", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Orders, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @*<div class="mb-3">
+                            <label for="formFile" class="form-label">Default file input example</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>*@
+                    <div class="mb-3">
+                        <label>Trạng thái</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Xuất bản", Value = "1" }, new SelectListItem { Text = "Không xuất bản", Value = "2" } }, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

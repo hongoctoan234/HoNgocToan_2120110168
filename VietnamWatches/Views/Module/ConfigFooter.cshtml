@@ -1,0 +1,22 @@
+﻿@model MyClass.Models.Config
+
+
+<div class="col-lg-3 col-md-6">
+    <div class="footer-box about-widget">
+        <h2 class="widget-title">Giới thiệu chung</h2>
+        <p>
+            @ViewBag.ConfigInfo
+        </p>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6">
+    <div class="footer-box get-in-touch">
+        <h2 class="widget-title">Liên hệ với chúng tôi</h2>
+        <ul>
+            <li>@ViewBag.ConfigAddress</li>
+            <li>@ViewBag.ConfigEmail</li>
+            <li>@ViewBag.ConfigPhone</li>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,187 @@
+﻿@model PagedList.IPagedList<MyClass.Models.ProductInfo>
+@using PagedList.Mvc;
+@{
+    var supplier = ViewBag.Supplier;
+}
+@{
+    ViewBag.Title = supplier.Name;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@Html.Action("BreadCrumb", "Module")
+
+@section header{
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+          rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+    $(function () {
+        $(".addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.ProductId = $(this).attr("data-id");
+            // lấy số lượng đặt hàng
+            if (model.QtyBuy == 0) {
+                model.QtyBuy = 1;
+            } else {
+                model.QtyBuy = model.QtyBuy + 1;
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddCart", "GioHang")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Thêm vào giỏ hàng thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Lỗi trong khi thêm vào giỏ hàng!',
+                    })
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+}
+<!-- products -->
+<div class="product-section mt-100 mb-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text font-monospace">@supplier.Name</span></h3>
+                    <p>@supplier.Address</p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="">
+                    <div class="product-image bg-image hover-zoom p-0">
+                        <a href="@supplier.Slug"><img src="~/Public/images/suppliers/@supplier.Img" alt=""></a>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <!-- single article section -->
+        <div class="mt-20 mb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="single-article-section">
+                            <div class="row product-lists">
+                                @foreach (var product in Model)
+                                {
+                                    <div class="col-lg-4 col-md-6 text-center mt-50 mb-20 @product.CatId">
+                                        <div class="single-product-item">
+                                            <div class="product-image">
+                                                <a href="@product.Slug"><img src="~/Public/images/products/@product.Images" alt=""></a>
+                                            </div>
+                                            <h3 class="font-monospace"> <a href="@product.Slug" class="text-dark">@product.Name</a></h3>
+                                            <div class="row"></div>
+                                            @if (product.Price != product.PriceSale)
+                                            {
+                                                <span class="text-danger">
+                                                    <del>
+                                                        @string.Format("{0:0,0}", product.Price)
+                                                        VNĐ
+                                                    </del>
+                                                </span>
+                                                <p class="product-price">
+                                                    @string.Format("{0:0,0}", product.PriceSale)
+                                                    <sup>VNĐ</sup>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p class="product-price">
+                                                    @string.Format("{0:0,0}", product.PriceSale)
+                                                    <sup>VNĐ</sup>
+                                                </p>
+                                            }
+                                            <a href="javascript:(0)" data-id="@product.Id" class="addtocart cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                                            @*<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>*@
+                                        </div>
+                                    </div>
+                                }
+                                <div class="row mb-sm-10 mt-lg-2">
+                                    <div class="col-lg-12 text-center">
+                                        <div class="pagination-wrap">
+                                            <ul>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="col-lg-1"></div>
+                                                        <div class="col-lg-11">
+                                                            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                            trên @Model.PageCount
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4"></div>
+                                                        <div class="col-lg-8">
+                                                            @Html.PagedListPager(Model, page => Url.Action("ProductSupplier", "Site", new { page }), new PagedListRenderOptions
+                                                       {
+                                                           MaximumPageNumbersToDisplay = 5,
+                                                       })
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="sidebar-section">
+                            <div class="recent-posts">
+                                @Html.Action("ListCatProduct", "Module")
+                            </div>
+                            <div class="archive-posts">
+                                @Html.Action("ListPostProduct", "Module")
+                            </div>
+                            <div class="tag-section">
+                                @Html.Action("ListSupProduct", "Module")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end single article section -->
+
+    </div>
+</div>
+<!-- end products -->
+@section footer{
+    <!-- MDB -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+}

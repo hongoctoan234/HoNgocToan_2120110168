@@ -1,0 +1,251 @@
+﻿@model IEnumerable<CartItem>
+@{
+    ViewBag.Title = "Giỏ hàng của bạn";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@section header{
+    <link href="~/Public/css/ButtonCss.css" rel="stylesheet" />
+}
+@Html.Action("BreadCrumb", "Module")
+
+<!-- cart -->
+<div class="cart-section mt-100 mb-150">
+    <div class="container">
+        @if (Model != null)
+        {
+            using (Html.BeginForm("UpdateCart", "GioHang", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="section-title">
+                            <h3 class="font-monospace"><span class="orange-text font-monospace">GIỎ HÀNG</span> CỦA BẠN</h3>
+                            <p>Hãy là người tiêu dùng thông minh, lựa chọn thật kĩ trước khi xác nhận</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="cart-table-wrap">
+
+                            <table class="cart-table" id="myTable">
+                                <thead class="cart-table-head">
+                                    <tr class="table-head-row">
+                                        <th class="product-remove"><a href="@Url.Action("DelAllCart", "GioHang")"><i class="fas fa-calendar"></i></a></th>
+                                        <th class="product-image">Hình ảnh</th>
+                                        <th class="product-name">Tên sản phẩm</th>
+                                        <th class="product-price" style="width:100px;">Giá bán</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-total" style="width:130px;">Thành tiền (VNĐ)</th>
+                                    </tr>
+                                </thead>
+                                @{
+                                    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                }
+                                @{
+                                    decimal tongtien = 0;
+                                    int index = 0;
+                                }
+                                <tbody id="listCard">
+                                    @foreach (var cat in Model)
+                                    {
+                                        <tr class="table-body-row">
+                                            <td class="product-remove"><a href="@Url.Action("DelCart", "GioHang", new { productId = cat.ProductId })"><i class="far fa-window-close"></i></a></td>
+                                            <td class="product-image"><img src="~/Public/images/products/@cat.Images" alt=""></td>
+                                            <td class="product-name">@cat.NameProduct</td>
+                                            <td class="product-price">@String.Format(info, "{0:c00}", @cat.PriceBuy)</td>
+                                            <td class="product-quantity">
+                                                <input class="product-qty" name="quantity" type="number" min="1" max="10" value="@cat.QtyBuy">
+                                            </td>
+                                            <td class="product-total">@String.Format(info, "{0:c00}", @cat.Amount)</td>
+                                        </tr>
+                                        tongtien += cat.Amount;
+                                        index++;
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="total-section">
+                            <table class="total-table">
+                                <thead class="total-table-head">
+                                    <tr class="table-total-row">
+                                        <th style="width:55%;"></th>
+                                        <th>Giá (VNĐ)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="total-data">
+                                        <td><strong>Tổng cộng: </strong></td>
+                                        <td>@String.Format(info, "{0:c00}", tongtien)</td>
+                                    </tr>
+                                    <tr class="total-data">
+                                        <td><strong>Phí giao hàng toàn quốc: </strong></td>
+                                        @if (tongtien >= 500000)
+                                        {
+                                            <td>Bạn được miễn phí giao hàng với đơn hàng lớn hơn 500.000₫</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@String.Format(info, "{0:c00}", 30000)</td>
+
+                                            tongtien += 30000;
+                                        }
+
+                                    </tr>
+                                    <tr class="total-data">
+                                        <td><strong>Thành tiền: </strong></td>
+                                        <td>@String.Format(info, "{0:c00}", tongtien)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="cart-buttons">
+                                <input class="btn btn-sm boxed-btn mb-1 text-white" name="clickUpdate" type="submit"  value="Cập nhật giỏ hàng">
+                                @*<button class="btn btn-lg btn-info boxed-btn mb-1" name="clickUpdate" style="border-radius: 10px 100px / 120px; " type="submit"><span>Cập nhật giỏ hàng</span></button>*@
+                                <a href="~/thanh-toan" class="boxed-btn black">Thanh toán</a>
+                            </div>
+                        </div>
+
+                        @*<div class="coupon-section">
+                                <h3>Apply Coupon</h3>
+                                <div class="coupon-form-wrap">
+                                    <form action="index.html">
+                                        <p><input type="text" placeholder="Coupon"></p>
+                                        <p><input type="submit" value="Apply"></p>
+                                    </form>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="full-height-section error-section">
+                <div class="full-height-tablecell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2 text-center">
+                                <div class="error-text">
+                                    <i class="far fa-sad-tear"></i>
+                                    <h3 class="font-monospace"><span class="orange-text font-monospace">GIỎ HÀNG</span> CỦA BẠN ĐANG RỖNG</h3>
+                                    <p>Hãy quay lại và lựa chọn sản phẩm cho bạn</p>
+                                    <a href="~/tat-ca-san-pham" class="boxed-btn">Quay lại trang mua hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end error section -->
+        }
+    </div>
+</div>
+<!-- end cart -->
+@section footer{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @*<script>
+        var data = { };
+        $(document).ready(function () {
+            $(".product-qty").click(function () {
+                data = {
+                    "qty": parseInt($(this).val()),
+                    "vitri": $(this).attr('data-index')
+                };
+                console.log(data);
+                updateCart(data);
+           });
+        });
+
+
+        function updateCart(data) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UpdateCart", "GioHang")',
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                        buttonsStyling: false
+                    })
+                    if (data.Success) {
+                        console.log(data.Cart);
+                        if (data != null) {
+                            let html = "";
+                            $.each(data.Cart, function (i, Cart) {
+                                html += `<tr class="table-body-row">
+                                        <td class="product-remove"><a href="GioHang/DelCart?productId=`+ Cart.ProductId + `"><i class="far fa-window-close"></i></a></td>
+                                        <td class="product-image"><img src="Public/images/products/`+ Cart.Images + `" alt=""></td>
+                                        <td class="product-name">`+ Cart.NameProduct + `</td>
+                                        <td class="product-price">`+ Cart.PriceBuy*1 + ` ₫</td>
+                                        <td class="product-quantity">
+                                                 <input class="product-qty qty-input" id="input-qty" data-index="`+ i + `" type="number" min="1" max="10" value="` + Cart.QtyBuy * 1 + `">
+                                        </td>
+                                        <td class="product-total">`+ Cart.PriceBuy * Cart.QtyBuy + ` ₫</td>
+                                        </tr>`;
+                            })
+                            $('#listCard').html(html);
+                        }
+                        swalWithBootstrapButtons.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Cập nhật thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        //renderCart(data.Cart);
+                        //$('.product-total').replaceWith(`<td class="product-total">` + Cart.PriceBuy * Cart.QtyBuy +` ₫</td>`);
+                    }
+                    else {
+                        swalWithBootstrapButtons.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Số lượng hàng đang thấp hơn yêu cầu của bạn',
+                            showConfirmButton: false
+                        });
+                    }
+
+                },
+                error: function (data) {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                    })
+                    swalWithBootstrapButtons.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Lỗi trong khi cập nhật!',
+                    })
+                }
+            });
+        }
+        function renderCart(cart) {
+            let html = '<tbody id="listCard">';
+            cart.forEach((cart, i) => {
+                html += `<tr class="table-body-row">
+                            <td class="product-remove"><a href="GioHang/DelCart?productId=`+ cart.ProductId +`"><i class="far fa-window-close"></i></a></td>
+                            <td class="product-image"><img src="Public/images/products/`+ cart.Images +`" alt=""></td>
+                            <td class="product-name">`+ cart.NameProduct +`</td>
+                            <td class="product-price">`+ cart.PriceBuy +` ₫</td>
+                            <td class="product-quantity">
+                                     <input class="product-qty qty-input" id="input-qty" data-index="`+ i + `" type="number" min="1" max="10" value="` + cart.QtyBuy*1 +`">
+                            </td>
+
+                            <td class="product-total">`+ cart.PriceBuy * cart.QtyBuy +` ₫</td>
+                        </tr>`;
+                 })
+            html += '</tbody>';
+            $('#listCard').replaceWith(html);
+        }
+    </script>*@
+}

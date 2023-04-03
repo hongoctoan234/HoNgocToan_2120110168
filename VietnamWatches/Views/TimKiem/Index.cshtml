@@ -1,0 +1,161 @@
+﻿@model IEnumerable<MyClass.Models.Product>
+@{
+    ViewBag.Title = "Tìm kiếm";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@{
+    var product = ViewBag.SearchString;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $(".addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.ProductId = $(this).attr("data-id");
+            // lấy số lượng đặt hàng
+            if (model.QtyBuy == 0) {
+                model.QtyBuy = 1;
+            } else {
+                model.QtyBuy = model.QtyBuy + 1;
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddCart", "GioHang")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Thêm vào giỏ hàng thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Lỗi trong khi thêm vào giỏ hàng!',
+                    })
+                }
+            });
+            return false;
+        });
+    });
+</script>
+@Html.Action("BreadCrumb", "Module")
+
+@section header{
+}
+<!-- products -->
+<div class="product-section mb-20">
+    <div class="container">
+        <div class="row" style="margin-top:2%;">
+            <div class="col-lg-3">
+                <div class="sidebar-section">
+                    <div class="recent-posts">
+                        @Html.Action("ListCatProduct", "Module")
+                    </div>
+                    <div class="archive-posts">
+                        @Html.Action("ListPostProduct", "Module")
+                    </div>
+                    <div class="tag-section">
+                        @Html.Action("ListSupProduct", "Module")
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 pb-lg-5">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="section-title">
+                            <h3 class="font-monospace"><span class="orange-text font-monospace">KẾT QUẢ TÌM KIẾM:</span>@ViewBag.SearchString</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Count() != 0)
+                {
+                    <div class="product-section">
+                        <div class="row product-lists">
+                            @foreach (var search in Model)
+                            {
+                                <div class="col-lg-4 col-md-6 text-center mb-20">
+                                    <div class="single-product-item">
+                                        <div class="product-image bg-image hover-zoom">
+                                            <a href="@search.Slug"><img src="~/Public/images/products/@search.Images" alt=""></a>
+                                        </div>
+                                        <h3 class="font-monospace"> <a href="@search.Slug" class="text-dark">@search.Name</a></h3>
+                                        @if (search.Price != search.PriceSale)
+                                        {
+                                            <span class="text-danger">
+                                                <del>
+                                                    @string.Format("{0:0,0}", search.Price)
+                                                    VNĐ
+                                                </del>
+                                            </span>
+                                            <p class="product-price">
+                                                @string.Format("{0:0,0}", search.PriceSale)
+                                                <sup>VNĐ</sup>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="product-price">
+                                                @string.Format("{0:0,0}", search.Price)
+                                                <sup>VNĐ</sup>
+                                            </p>
+                                        }
+                                        <a href="javascript:(0)" data-id="@search.Id" class="addtocart cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                                        @*<a href="@Url.Action("AddCart","GioHang", new {productId=product.Id})" class="cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>*@
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!-- error section -->
+
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2 text-center">
+                            <div class="error-text">
+                                <i class="far fa-sad-cry"></i>
+                                <h1>Tìm kiếm của bạn không khả dụng.</h1>
+                                <p>Hãy tìm kiếm bằng từ khoá khác nhé.</p>
+                                <a href="~/" class="boxed-btn">Quay lại trang chủ</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end error section -->
+
+
+                }
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- end products -->
+@section footer{
+    <!-- MDB -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+}

@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Đăng kí";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@section header{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+}
+@Html.Action("BreadCrumb", "Module")
+
+@using (Html.BeginForm("DoRegister", "KhachHang", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="container bg-light">
+        <div class="p-3">
+            <div class="row">
+                <div class="col-md-8 p-md-1">
+                    <h3 class="text-uppercase " style="color:#cd1818">Đăng ký thành viên</h3>
+                    <form>
+                        <span class="text-danger">
+                            @ViewBag.Error
+                        </span>
+                        <div class="card-body">
+                            <div class="billing-address-form">
+                                <div class="form-group">
+                                    <label for="inputAddress">Tên đăng nhập</label>
+                                    <input id="textUsername" name="username" type="text" class="form-control" placeholder="" autofocus required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputAddress">Mật khẩu</label>
+                                        <input id="textPassword" name="password" type="password" class="form-control" placeholder="" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputAddress">Xác nhận mật khẩu</label>
+                                        <input id="textConfirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Họ và tên</label>
+                                        <input id="textFullName" name="fullname" type="text" class="form-control" placeholder="" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Email</label>
+                                        <input id="textEmail" name="email" type="email" class="form-control" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Địa chỉ</label>
+                                    <input id="textAddress" name="address" type="text" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputCity">Số điện thoại</label>
+                                        <input id="textPhone" name="phone" type="text" class="form-control" placeholder="" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputCity">Chọn ảnh đại diện</label>
+                                        <input id="imgCustomer" name="imageCustomer" type="file" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<a href="javascript:(0)" data-id="" class="doRegisterSubmit cart-btn ml-lg-5 mb-1"><i class="fas fa-user-alt"></i> Đăng ký</a>*@
+
+                        <input class="btn btn-sm btn-info boxed-btn ml-lg-5 mb-1 text-white" onclick="myFunction()" name="clickUpdate" type="submit" value="Đăng ký">
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-form-wrap">
+                        <div class="contact-form-box">
+                            <h4 class="font-monospace"><i class="fas fa-map"></i> Vị trí của hàng</h4>
+                            <p>63/49 đường số 10 <br> Phước Long B, Tp.Thủ Đức <br> Tp.Hồ Chí Minh</p>
+                        </div>
+                        <div class="contact-form-box">
+                            <h4 class="font-monospace"><i class="far fa-clock"></i> Thời gian hoạt động</h4>
+                            <p>Thứ 2 - Thứ 6: 8 to 9 PM <br> Thứ 7- Chủ Nhật: 10 to 6 PM </p>
+                        </div>
+                        <div class="contact-form-box">
+                            <h4 class="font-monospace"><i class="fas fa-address-book"></i> Liên hệ</h4>
+                            <p>Phone: 0896414627<br> Email: toan24032002@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section footer{
+    <script>
+        function myFunction() {
+            Swal.fire('Đăng kí thành công!!!')
+    </script>
+}

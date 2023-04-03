@@ -1,0 +1,130 @@
+﻿@model MyClass.Models.Supplier
+
+@{
+    ViewBag.Title = "Chi tiết nhà cung cấp";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div>
+    <hr />
+    <div class="dl-horizontal my-2 mx-3">
+        <h4>Chi tết - Nhà cung cấp</h4>
+        <div class="row">
+            <div class="col col-md-10">
+                <a href="@Url.Action("Index", "Supplier")" class="btn btn-sm btn-danger my-2"><i class="fas fa-arrow-circle-left"></i>  Về danh sách</a>
+            </div>
+            <div class="col col-md-2">
+                <a href="@Url.Action("Edit", "Supplier", new {id = Model.Id})" class="btn btn-sm btn-success my-2"><i class="fas fa-save"></i>  Cập nhật</a>
+            </div>
+        </div>
+        <hr />
+
+        <div class="container-fluid pt-2 px-2">
+            @Html.Partial("Message")
+            <table class="table table-bordered table-hover table-striped" id="myTable">
+                <tr>
+                    <th>Tên trường</th>
+                    <th>Nội dung</th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Slug)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Slug)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Orders)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Orders)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Address)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CreatedAt)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UpdatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.UpdatedAt)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </td>
+                    <td>
+                        @if (Model.Status == 1)
+                        {
+                            <p>Xuất bản</p>
+                        }
+                        else
+                        {
+                            <p>Không xuất bản</p>
+                        }
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>

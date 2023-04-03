@@ -1,0 +1,107 @@
+﻿@model IEnumerable<MyClass.Models.Order>
+@{
+    ViewBag.Title = "Tất cả đơn đặt hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <link href="~/Public/admin/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Public/admin/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<h2 class="my-2 mx-2">Tất cả đơn đặt hàng </h2>
+
+<p class="my-2 mx-2">
+    @*<a href="@Url.Action("Create", "Order")" class="btn btn-sm btn-success"><i class="far fa-plus-square"></i>  Thêm</a>*@
+    <a href="@Url.Action("Trash", "Order")" class="btn btn-sm btn-danger"><i class="fas fa-trash-restore"></i>  Thùng rác</a>
+</p>
+<div class="container-fluid pt-2 px-2">
+    @Html.Partial("Message")
+    <table class="table table-bordered table-hover table-striped" id="myTable">
+        <thead>
+            <tr class="text-center">
+                <th style="width:10px;">
+                    ID
+                </th>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th style="width:120px;">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.Action("NameCustomer", "User", new { userId = item.UserId })
+                        @*@Html.DisplayFor(modelItem => item.DeliveryName)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryPhone)
+                    </td>
+                    <td>
+                        @if (item.Status == 1)
+                        {
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <i class="fa fa-home me-2"></i>Mới!
+                            </div>
+
+                        }
+                        else if (item.Status == 2)
+
+                        {
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                                <i class="fa bi bi-exclamation-triangle me-2"></i>Đã xác nhận!
+                            </div>
+
+                        }
+                        else if (item.Status == 3)
+
+                        {
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fa fa-exclamation-circle me-2"></i>Đang vận chuyển!
+                            </div>
+                        }
+                        else if (item.Status == 4)
+
+                        {
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <i class="fa fa-exclamation-circle me-2"></i>Thành công!
+                            </div>
+
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Export", "Order", new { id = item.Id })" class="btn btn-sm btn-info mx-1"><i class="fas fa-download"></i></a>
+                        <a href="@Url.Action("Details", "Order", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-info-circle"></i></a>
+                        <a href="@Url.Action("DelTrash", "Order", new { id = item.Id })" class="btn btn-sm btn-danger mx-1 my-1"><i class="fas fa-trash"></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

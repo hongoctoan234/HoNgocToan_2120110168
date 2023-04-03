@@ -1,0 +1,194 @@
+﻿@model MyClass.Models.Order
+
+@{
+    ViewBag.Title = "Chi tiết Đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div>
+    <hr />
+    <div class="dl-horizontal my-2 mx-3">
+        <h4>Chi tết - Đơn hàng</h4>
+        <div class="row">
+            <div class="col col-md-10">
+                <a href="@Url.Action("Index", "Order")" class="btn btn-sm btn-danger my-2"><i class="fas fa-arrow-circle-left"></i>  Về danh sách</a>
+            </div>
+            <div class="col col-md-2">
+                <a href="@Url.Action("Edit", "Order", new {id = Model.Id})" class="btn btn-sm btn-success my-2"><i class="fas fa-save"></i>  Cập nhật</a>
+            </div>
+        </div>
+        <hr />
+
+        <h5 class="font-monospace">Thông tin cơ bản khách hàng</h5>
+        <div class="container-fluid pt-2 px-2">
+            <table class="table table-bordered table-hover table-striped" id="myTable">
+                <tr>
+                    <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </td>
+                    <td>
+                        @Html.Action("NameCustomer", "User", new { userId = Model.UserId })
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+
+        <h5 class="font-monospace">Thông tin cơ bản đơn hàng</h5>
+        <div class="container-fluid pt-2 px-2">
+            @Html.Partial("Message")
+            <table class="table table-bordered table-hover table-striped" id="myTable">
+                <tr>
+                    <th>Tên trường</th>
+                    <th>Nội dung</th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Id)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Code)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DeliveryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DeliveryName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DeliveryEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DeliveryEmail)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DeliveryPhone)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DeliveryPhone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DeliveryAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DeliveryAddress)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DeliveryNote)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DeliveryNote)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CreateDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UpdatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.UpdatedBy)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UpdatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.UpdatedAt)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        <div class="container-fluid pt-2 px-2">
+            <table class="table table-bordered table-hover table-striped" id="myTable">
+                <tr style="text-align:center;">
+                    <th>Mã sản phẩm</th>
+                    <th>Hình sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                @{
+                    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                }
+                @{ decimal tongtien = 0;}
+                @foreach (var chitietdonhang in ViewBag.ListChiTiet)
+                {
+                    <tr style="text-align:center;">
+                        <td>
+                            @chitietdonhang.ProductId
+                        </td>
+                        <td>
+                            <img src="~/Public/images/products/@Html.Action("NameImgOrder", "Product", new { productId = chitietdonhang.ProductId })" class="img-fluid" style="width:120px; height:120px;" alt="ImgName" />
+                        </td>
+                        <td>
+                            @Html.Action("NameProductOrder", "Product", new { productId = chitietdonhang.ProductId })
+                        </td>
+                        <td style="text-align:right;">
+                            @String.Format(info, "{0:c00}", @chitietdonhang.Price)
+                        </td>
+                        <td>
+                            @chitietdonhang.Quantity
+                        </td>
+                        <td style="text-align:right;">
+                            @String.Format(info, "{0:c00}", @chitietdonhang.Amount)
+                        </td>
+                    </tr>
+                    tongtien += chitietdonhang.Amount;
+                }
+                <tfoot>
+                    <tr>
+                        <td>Trạng thái</td>
+                        <td colspan="2">
+                            <a href="@Url.Action("Huy", "Order", new {id = Model.Id})" class="btn btn-sm btn-danger"><i class="far fa-closed-captioning"></i>  Huỷ đơn</a>
+                            <a href="@Url.Action("DaXacMinh", "Order", new {id = Model.Id})" class="btn btn-sm btn-warning text-white"><i class="far fa-check-circle"></i>  Đã xác minh</a>
+                            <a href="@Url.Action("DangVanChuyen", "Order", new {id = Model.Id})" class="btn btn-sm btn-info text-white"><i class="far fa-calendar"></i>  Đang vận chuyển</a>
+                            <a href="@Url.Action("DaGiao", "Order", new {id = Model.Id})" class="btn btn-sm btn-success"><i class="far fa-check-square"></i>  Đã giao</a>
+                        <td></td>
+                        @if (tongtien <500000)
+                        {
+                            tongtien += 30000;
+                        }
+                        <td>Tổng tiền</td>
+                        <td style="text-align:right;"> @String.Format(info, "{0:c00}", @tongtien)</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+

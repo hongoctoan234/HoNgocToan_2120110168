@@ -1,0 +1,11 @@
+﻿
+@model IEnumerable<MyClass.Models.Post>
+
+<h4 class="font-monospace"> Danh mục bài viết </h4>
+<ul>
+    @foreach (var post in Model)
+    {
+        <li><a href="~/@post.Slug">@post.Title</a></li>
+    }
+</ul>
+

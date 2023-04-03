@@ -1,0 +1,11 @@
+﻿
+@model IEnumerable<MyClass.Models.Category>
+
+
+<h4 class="font-monospace"> Danh mục sản phẩm </h4>
+<ul>
+    @foreach (var category in Model)
+    {
+        <li><a href="~/@category.Slug">@category.Name</a></li>
+    }
+</ul>

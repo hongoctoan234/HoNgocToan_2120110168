@@ -1,0 +1,102 @@
+﻿@model IEnumerable<MyClass.Models.Contact>
+@{
+    ViewBag.Title = "Tất cả liên hệ";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <link href="~/Public/admin/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Public/admin/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<h2 class="my-2 mx-2">Tất cả liên hệ </h2>
+
+<p class="my-2 mx-2">
+    @*<a href="@Url.Action("Create", "Contact")" class="btn btn-sm btn-success"><i class="far fa-plus-square"></i>  Thêm</a>*@
+    <a href="@Url.Action("Trash", "Contact")" class="btn btn-sm btn-danger"><i class="fas fa-trash-restore"></i>  Thùng rác</a>
+</p>
+<div class="container-fluid pt-2 px-2">
+    @Html.Partial("Message")
+    <table class="table table-bordered table-hover table-striped" id="myTable">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    Tên liên hệ
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Liên hệ lúc
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th style="width:180px;">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @if (item.Status == 1)
+                    {
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <i class="fa fa-home me-2"></i>Mới!
+                        </div>
+
+                    }
+                    else if (item.Status == 2)
+
+                    {
+                        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                            <i class="fa bi bi-exclamation-triangle me-2"></i>Đã phản hồi!
+                        </div>
+
+                    }
+                </td>
+                <td>
+                    @*@if (item.Status == 1)
+            {
+                <a href="@Url.Action("Status", "Contact", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-toggle-on"></i> </a>
+
+            }
+            else
+            {
+                <a href="@Url.Action("Status", "Contact", new { id = item.Id })" class="btn btn-sm btn-primary mx-1 my-1"><i class="fas fa-toggle-off"></i> </a>
+
+            }*@
+                    @*<a href="@Url.Action("Edit", "Contact", new { id = item.Id })" class="btn btn-sm btn-info mx-1"><i class="fas fa-edit"></i></a>*@
+                    <!-- Small modal -->
+                    <a href="@Url.Action("Details", "Contact", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-info-circle"></i></a>
+                    <a href="@Url.Action("DelTrash", "Contact", new { id = item.Id })" class="btn btn-sm btn-danger mx-1 my-1"><i class="fas fa-trash"></i> </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

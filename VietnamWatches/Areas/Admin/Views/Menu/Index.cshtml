@@ -1,0 +1,267 @@
+﻿@model IEnumerable<MyClass.Models.Menu>
+
+@{
+    ViewBag.Title = "Tất cả menu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <link href="~/Public/admin/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+}
+@section footer{
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('.changeStatus').click(function () {
+                var model = {};
+                model.Id = $(this).attr("data-id");
+                var dataId = model.Id;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Status", "Menu")',
+                    data: JSON.stringify(model),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (res) {
+                        if (res == 2) {
+                            $('#status_' + dataId).removeClass('btn-success').addClass('btn-primary');
+                            $('#iconStatus_' + dataId).removeClass('fa-toggle-on').addClass('fa-toggle-off');
+                            $("#themeChangeStatus").css({
+                                display: "inline-block",
+                                visibility: "initial",
+                            });
+                            function initialSetup() {
+                                if (document.getElementById("themeChangeStatus") !== null) {
+                                    document.getElementById('themeChangeStatus').style.visibility = 'initial';
+                                    setTimeout(function () {
+                                        document.getElementById('themeChangeStatus').style.visibility = 'hidden';
+                                        document.getElementById('themeChangeStatus').style.display = 'none';
+                                    }, 2000);
+                                }
+                            }
+                            initialSetup();
+                        } else {
+                            $('#status_' + dataId).removeClass('btn-primary').addClass('btn-success');
+                            $('#iconStatus_' + dataId).removeClass('fa-toggle-off').addClass('fa-toggle-on');
+                            $("#themeChangeStatus").css({
+                                display: "inline-block",
+                                visibility: "initial"
+                            });
+                            function initialSetup() {
+                                if (document.getElementById("themeChangeStatus") !== null) {
+                                    document.getElementById('themeChangeStatus').style.visibility = 'initial';
+                                    setTimeout(function () {
+                                        document.getElementById('themeChangeStatus').style.visibility = 'hidden';
+                                        document.getElementById('themeChangeStatus').style.display = 'none';
+                                    }, 2000);
+                                }
+                            }
+                            initialSetup();
+                        }
+                    },
+                error: function () {
+                    alert("Lỗi trong khi Thay đổi trạng thái!");
+                }
+            });
+            return false;
+        });
+        });
+    </script>
+    <script src="~/Public/admin/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<h2 class="my-2 mx-2">Danh sách Menu</h2>
+
+<p class="my-2 mx-2">
+    <div class="row">
+        <div class="col-lg-7 text-lg-start mt-lg-3 ml-lg-5" style="margin-bottom: 2%;">
+            <a href="@Url.Action("Trash", "Menu")" class="btn btn-sm btn-danger"><i class="fas fa-trash-restore"></i>  Thùng rác</a>
+        </div>
+        <div class="col-lg-4">
+            <div id="themeChangeStatus" style="visibility:hidden; display:none;" class="alert alert-primary alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>Thay đổi trạng thái thành công!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div id="themeDelItem" style="visibility:hidden; display:none;" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>Chuyển vào thùng rác thành công!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</p>
+@using (Html.BeginForm("Index", "Menu", FormMethod.Post))
+{
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <div class="container-fluid">
+            <div class="card">
+                <!-- Info boxes -->
+                @Html.Partial("Message")
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingPosition">
+                                    <span class="py-1">Vị trí</span>
+                                    <select name="Position" class="form-control">
+                                        <option value="mainmenu">Main Menu</option>
+                                        <option value="footermenu">Footer Menu</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingCategory">
+                                    <span>Danh mục sản phẩm</span>
+                                    <span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+                                </div>
+
+                                <div id="collapseCategory" class="collapse p-2 m-2" aria-labelledby="headingCategory" data-parent="#accordionExample">
+                                    @foreach (var row in ViewBag.ListCategory)
+                                    {
+                                        <fieldset class="form-group">
+                                            <input name="nameCategory" value="@row.Id" id="category_@row.Id" type="checkbox">
+                                            <label for="category_@row.Id">@row.Name</label>
+                                        </fieldset>
+                                    }
+                                    <fieldset class="form-group">
+                                        <input type="submit" name="ThemCategory" value="Thêm" class="btn btn-outline-primary w-100 m-2">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTopic">
+                                    <span>Chủ đề bài viết</span>
+                                    <span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapseTopic" aria-expanded="true" aria-controls="collapseTopic">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+
+                                </div>
+
+                                <div id="collapseTopic" class="collapse p-2 m-2" aria-labelledby="headingTopic" data-parent="#accordionExample">
+                                    @foreach (var row in ViewBag.ListTopic)
+                                    {
+                                        <fieldset class="form-group">
+                                            <input name="nameTopic" value="@row.Id" id="topic_@row.Id" type="checkbox">
+                                            <label for="topic_@row.Id">@row.Name</label>
+                                        </fieldset>
+                                    }
+                                    <fieldset class="form-group">
+                                        <input type="submit" name="ThemTopic" value="Thêm" class="btn btn-outline-primary w-100 m-2">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingPage">
+                                    <span>Trang đơn</span>
+                                    <span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+
+                                </div>
+
+                                <div id="collapsePage" class="collapse p-2 m-2" aria-labelledby="headingPage" data-parent="#accordionExample">
+                                    @foreach (var row in ViewBag.ListPage)
+                                    {
+                                        <fieldset class="form-group">
+                                            <input name="namePage" value="@row.Id" id="topic_@row.Id" type="checkbox">
+                                            <label for="topic_@row.Id">@row.Title</label>
+                                        </fieldset>
+                                    }
+                                    <fieldset class="form-group">
+                                        <input type="submit" name="ThemPage" value="Thêm" class="btn btn-outline-primary w-100 m-2">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingCustom">
+                                    <span>Tùy chỉnh</span>
+                                    <span class="float-right btn btn-sm btn-info" data-toggle="collapse" data-target="#collapseCustom" aria-expanded="true" aria-controls="collapseCustom">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+
+                                </div>
+                                <div id="collapseCustom" class="collapse p-2 m-2" aria-labelledby="headingCustom" data-parent="#accordionExample">
+                                    <fieldset class="form-group">
+                                        <label>Tên menu</label>
+                                        <input name="name" class="form-control" id="checkid" type="text">
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label>Liên kết</label>
+                                        <input name="link" class="form-control" type="text">
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <input type="submit" name="ThemCustom" value="Thêm" class="btn btn-outline-primary w-100 m-2">
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <table class="table table-bordered table-striped" id="myTable">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>ID</th>
+                                    <th>Tên Menu</th>
+                                    <th>Liên kết</th>
+                                    <th>Kiểu Menu</th>
+                                    <th>Vị trí</th>
+                                    <th style="width:180px;">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="text-center">
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </th>
+                                        <td>@item.Name</td>
+                                        <td>@item.Link</td>
+                                        <td>@item.Type</td>
+                                        <td>@item.Position</td>
+                                        <td>
+                                            @if (item.Status == 1)
+                                            {
+                                                @*<a href="@Url.Action("Status", "Menu", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-toggle-on"></i> </a>*@
+                                                <a href="javascript:(0)" id="status_@item.Id" data-id="@item.Id" class="changeStatus btn btn-sm btn-success mx-1 my-1 @item.Id">
+                                                    <i id="iconStatus_@item.Id" class="fas fa-toggle-on @item.Id"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                @*<a href="@Url.Action("Status", "Menu", new { id = item.Id })" class="btn btn-sm btn-primary mx-1 my-1"><i class="fas fa-toggle-off"></i> </a>*@
+                                                <a href="javascript:(0)" id="status_@item.Id" data-id="@item.Id" class="changeStatus btn btn-sm btn-primary mx-1 my-1 @item.Id">
+                                                    <i id="iconStatus_@item.Id" class="fas fa-toggle-off @item.Id"></i>
+                                                </a>
+                                            }
+                                            <a href="@Url.Action("Edit", "Menu", new { id = item.Id })" class="btn btn-sm btn-info mx-1"><i class="fas fa-edit"></i></a>
+                                            <a href="@Url.Action("Details", "Menu", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-info-circle"></i></a>
+                                            <a href="@Url.Action("DelTrash", "Menu", new { id = item.Id })" class="btn btn-sm btn-danger mx-1 my-1"><i class="fas fa-trash"></i> </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!--/. container-fluid -->
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+}

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<MyClass.Models.ProductInfo>
+@{
+    var category = ViewBag.Category;
+}
+@section header{
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+          rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+    $(function () {
+        $(".addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.ProductId = $(this).attr("data-id");
+            // lấy số lượng đặt hàng
+            if (model.QtyBuy == 0) {
+                model.QtyBuy = 1;
+            } else {
+                model.QtyBuy = model.QtyBuy + 1;
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddCart", "GioHang")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Thêm vào giỏ hàng thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Lỗi trong khi thêm vào giỏ hàng!',
+                    })
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+
+
+}
+@if (Model.Count() != 0)
+{
+
+    <div class="row" style="margin-top:2%;">
+        <div class="col-lg-12 text-center">
+            <div class="section-title row">
+                <div class="col-10">
+                    <h3><span class="orange-text text-uppercase font-monospace">@category.Name</span></h3>
+                </div>
+                <div class="col-2">
+                    <a href="~/@category.Slug" class="read-more-btn">Xem thêm <i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-product-item">
+                    <div class="product-image bg-image hover-zoom">
+                        <a href="@product.Slug"><img class="img-fluid" src="~/Public/images/products/@product.Images" alt=""></a>
+                    </div>
+                    <h3 class="font-monospace"> <a href="@product.Slug" class="text-dark">@product.Name</a></h3>
+                    <div class="row"></div>
+                    @if (product.Price != product.PriceSale)
+                    {
+                        <span class="text-danger">
+                            <del>
+                                @string.Format("{0:0,0}", product.Price)
+                                VNĐ
+                            </del>
+                        </span>
+                        <p class="product-price">
+                            @string.Format("{0:0,0}", product.PriceSale)
+                            <sup>VNĐ</sup>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="product-price">
+                            @string.Format("{0:0,0}", product.PriceSale)
+                            <sup>VNĐ</sup>
+                        </p>
+                    }
+                    <a href="javascript:(0)" data-id="@product.Id" class="addtocart cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                    @*<a href="javascript:(0)" data-id="@product.Id" class="addToCartHome cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>*@
+                </div>
+            </div>
+        }
+    </div>
+}
+@section footer{
+    <!-- MDB -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+}

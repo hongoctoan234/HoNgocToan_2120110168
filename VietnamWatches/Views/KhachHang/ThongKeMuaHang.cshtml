@@ -1,0 +1,176 @@
+﻿@model IEnumerable<MyClass.Models.Order>
+@{
+    var infoOrder = ViewBag.order;
+}
+@{
+    ViewBag.Title = "Thống kê mua hàng";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@section header{
+    <link href="~/Public/css/OrderTracking.css" rel="stylesheet" />
+
+}
+
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section" style="background-image: url(../Public/images/banner-doi.png); ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>UY TÍN TẠO NÊN THƯƠNG HIỆU</p>
+                    <h1>Bách Hoá Xanh</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- shop banner -->
+<section class="mt-80 mb-80">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <h4 class="text-uppercase font-monospace" style="color:#ffffff">Thống kê đơn hàng từng đặt</h4>
+                @Html.Partial("Message")
+                <div>
+                    @foreach (var ct in infoOrder)
+                    {
+                        <div class="px-1 px-md-4 mx-auto">
+                            <div class="card">
+                                <div class="row d-flex justify-content-between px-3 top">
+                                    <div class="d-flex">
+                                        <h5 class="font-monospace"> Mã đơn hàng: <span class="text-primary font-weight-bold"><a href="@Url.Action("InfoOrderClick", "KhachHang", new {id = ct.Id})">#@ct.Code</a></span></h5>
+                                    </div>
+                                    <div class="d-flex flex-column text-sm-right">
+                                        <p class="mb-0">Thời gian đặt hàng: <span>@ct.ExportDate</span></p>
+                                        <p>Gửi đi: <span class="font-weight-bold">@ct.DeliveryAddress</span></p>
+                                    </div>
+                                </div>
+                                <!-- Add class 'active' to progress -->
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-12">
+                                        <div class="track">
+                                            @if (ct.Status == 1)
+                                            {
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Đặt hàng thành công</span> </div>
+                                                <div class="step "> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Xác nhận đơn hàng thành công</span> </div>
+                                                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Đang vận chuyển </span> </div>
+                                                <div class="step "> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Giao hàng thành công</span> </div>
+                                            }
+                                            @if (ct.Status == 2)
+                                            {
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Đặt hàng thành công</span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Xác nhận đơn hàng thành công</span> </div>
+                                                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Đang vận chuyển </span> </div>
+                                                <div class="step "> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Giao hàng thành công</span> </div>
+
+                                            }
+                                            @if (ct.Status == 3)
+                                            {
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Đặt hàng thành công</span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Xác nhận đơn hàng thành công</span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Đang vận chuyển </span> </div>
+                                                <div class="step "> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Giao hàng thành công</span> </div>
+
+                                            }
+                                            @if (ct.Status == 4)
+                                            {
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Đặt hàng thành công</span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Xác nhận đơn hàng thành công</span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Đang vận chuyển </span> </div>
+                                                <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Giao hàng thành công</span> </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--<div class="row">-->
+                            @*<div class="col-lg-8 col-md-12">
+                                    <div class="cart-table-wrap">
+
+                                        <table class="cart-table" id="myTable">
+                                            <thead class="cart-table-head">
+                                                <tr class="table-head-row">
+                                                    <th class="product-image">Hình ảnh</th>
+                                                    <th class="product-name">Tên sản phẩm</th>
+                                                    <th class="product-price">Giá bán</th>
+                                                    <th class="product-quantity">Số lượng</th>
+                                                    <th class="product-total">Thành tiền (VNĐ)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{
+                                                    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                                }
+                                                @{ decimal tongtien = 0;}
+                                                @foreach (var cat in ViewBag.detail)
+                                                {
+                                                    <tr class="table-body-row">
+                                                        <td class="product-image"><img src="~/Public/images/products/@Html.Action("NameImgOrder", "KhachHang", new { productId = cat.ProductId })" class="img-fluid" alt="ImgName" /></td>
+                                                        <td class="product-name"> @Html.Action("NameProductOrder", "KhachHang", new { productId = cat.ProductId })</td>
+                                                        <td class="product-price" style="text-align:right;">@String.Format(info, "{0:c00}", @cat.Price)</td>
+                                                        <td class="product-quantity" style="text-align:right;">@cat.Quantity</td>
+                                                        <td class="product-total" style="text-align:right;">@String.Format(info, "{0:c00}", @cat.Amount)</td>
+                                                    </tr>
+                                                    tongtien += cat.Amount;
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="total-section">
+                                        <table class="total-table">
+                                            <thead class="total-table-head">
+                                                <tr class="table-total-row">
+                                                    <th style="width:55%;"></th>
+                                                    <th>Giá (VNĐ)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="total-data">
+                                                    <td><strong>Tổng cộng: </strong></td>
+                                                    <td style="text-align:right;">@String.Format(info, "{0:c00}", tongtien)</td>
+                                                </tr>
+                                                <tr class="total-data">
+                                                    <td><strong>Phí giao hàng toàn quốc: </strong></td>
+                                                    @if (tongtien >= 500000)
+                                                    {
+                                                        <td>Bạn được miễn phí giao hàng với đơn hàng lớn hơn 500.000₫</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style="text-align:right;">@String.Format(info, "{0:c00}", 30000)</td>
+
+                                                        tongtien += 30000;
+                                                    }
+
+                                                </tr>
+                                                <tr class="total-data">
+                                                    <td><strong>Thành tiền: </strong></td>
+                                                    <td style="text-align:right;">@String.Format(info, "{0:c00}", tongtien)</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>*@
+                        <!--</div>
+                        <hr />-->
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- end shop banner -->

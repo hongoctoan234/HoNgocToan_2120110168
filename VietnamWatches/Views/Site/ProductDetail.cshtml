@@ -1,0 +1,329 @@
+﻿@model MyClass.Models.Product
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@Html.Action("BreadCrumb", "Module")
+
+@section header{
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="~/Public/css/DetailPrdStyle.css" rel="stylesheet" />
+    <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+          rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/lib/js/lightgallery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+    $(function () {
+        $("#addtocart").click(function () {
+            var data = {
+                "productId": @Model.Id,
+                "qty": $("#ipQuantity").val()
+            };
+            console.log(data.qty);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddCartDetail", "GioHang")',
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Thêm vào giỏ hàng thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Lỗi trong khi thêm vào giỏ hàng!',
+                    })
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+    <script>
+    $(function () {
+        $(".addToCartMore").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.ProductId = $(this).attr("data-id");
+            // lấy số lượng đặt hàng
+            if (model.QtyBuy == 0) {
+                model.QtyBuy = 1;
+            } else {
+                model.QtyBuy = model.QtyBuy + 1;
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddCart", "GioHang")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+    <link href="~/Public/css/magiczoomplus.css" rel="stylesheet" />
+    <script src="~/Public/js/magiczoomplus.js"></script>
+}
+
+
+<!-- single product -->
+<div class="single-product mt-100 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mt-100">
+                <!-- home page slider -->
+                <div class="container mt-5">
+                    <div class="carousel-container position-relative row">
+                        <!-- Sorry! Lightbox doesn't work - yet. -->
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <!-- single home slider -->
+                                @{
+                                    if (Model.ImageSecondary != null)
+                                    {
+                                        string[] listImg = Model.ImageSecondary.Split(',');
+                                        int index = 1;
+                                        <div class=" carousel-item active " data-slide-number="0">
+                                            <a data-zoom-id="Zoom-1" class="MagicZoom"
+                                               href="~/Public/images/products/@Model.Images">
+                                                <img src="~/Public/images/products/@Model.Images" srcset="~/Public/images/products/@Model.Images"
+                                                     alt="" />
+                                            </a>
+                                        </div>
+                                        foreach (string img in listImg)
+                                        {
+                                            <div class=" carousel-item " data-slide-number="0">
+                                                <a data-zoom-id="Zoom-1" class="MagicZoom"
+                                                   href="~/Public/images/products/@img">
+                                                    <img src="~/Public/images/products/@img" srcset="~/Public/images/products/@img"
+                                                         alt="" />
+                                                </a>
+                                            </div>
+                                            index++;
+                                        }
+                                    }
+                                }
+                                <!-- single home slider -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel Navigation -->
+                    <div id="carousel-thumbs" class="carousel slide bg-black bg-opacity-10 rounded-4 mt-1" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row mx-0">
+                                    <div id="carousel-selector-0" class="thumb col-4 col-sm-2 px-1 py-2 selected" data-target="#myCarousel" data-slide-to="0">
+                                        <img src="~/Public/images/products/@Model.Images" class="img-fluid" alt="...">
+                                    </div>
+                                    @{
+                                        if (Model.ImageSecondary != null)
+                                        {
+                                            string[] listImg = Model.ImageSecondary.Split(',');
+                                            int index = 1;
+                                            foreach (string img in listImg)
+                                            {
+                                                if (index <= 5)
+                                                {
+                                                    <div id="carousel-selector-@index" class="thumb col-4 col-sm-2 px-1 py-2" data-target="#myCarousel" data-slide-to="@index">
+                                                        <img src="~/Public/images/products/@img" class="img-fluid" alt="...">
+                                                    </div>
+                                                }
+                                                index++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row mx-0">
+                                    @{
+                                        if (Model.ImageSecondary != null)
+                                        {
+                                            string[] listImg = Model.ImageSecondary.Split(',');
+                                            int index = 1;
+                                            foreach (string img in listImg)
+                                            {
+                                                if (index > 5)
+                                                {
+                                                    <div id="carousel-selector-@index" class="thumb col-4 col-sm-2 px-1 py-2" data-target="#myCarousel" data-slide-to="@index">
+                                                        <img src="~/Public/images/products/@img" class="img-fluid" alt="...">
+                                                    </div>
+                                                }
+                                                index++;
+                                            }
+                                        }
+                                    }
+                                    <div class="col-2 px-1 py-2"></div>
+                                    <div class="col-2 px-1 py-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @{
+                            if (Model.ImageSecondary != null)
+                            {
+                                string[] listImg = Model.ImageSecondary.Split(',');
+                                int index = 1;
+                                foreach (string img in listImg)
+                                {
+                                    if (index > 5)
+                                    {
+                                        <a class="carousel-control-prev" href="#carousel-thumbs" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carousel-thumbs" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    }
+                                    index++;
+                                }
+                            }
+                        }
+
+                    </div>
+                    @Html.Action("Comments", "Module", new {id = Model.Id})
+                </div>
+            </div> <!-- /row -->
+            <div class="col-md-7">
+                <div class="single-product-content">
+                    <h3 class="font-monospace">@Model.Name</h3>
+                    @if (Model.Price != Model.PriceSale)
+                    {
+                        <span class="text-danger">
+                            <del>
+                                Giá gốc: @string.Format("{0:0,0}", Model.Price)
+                                VNĐ
+                            </del>
+                        </span>
+                        <p class="product-price single-product-pricing">
+                            @string.Format("{0:0,0}", Model.PriceSale)
+                            <sup>VNĐ</sup>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="product-price single-product-pricing">
+                            @string.Format("{0:0,0}", Model.Price)
+                            <sup>VNĐ</sup>
+                        </p>
+                    }
+
+                    <div class="single-product-form">
+                        <input type="number" value="1" max="10" min="1" id="ipQuantity"><br/>
+                        <a href="javascript:(0)" id="addtocart" class="cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                        @*<a href="@Url.Action("AddCart","GioHang", new {productId=Model.Id})" class="cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>*@
+                        <p><strong>Mã số sản phẩm: </strong>@Html.Raw(Model.MetaDesc)</p>
+                    </div>
+                    <h4 class="font-monospace" style="margin-top:2px;">Chia sẽ ngay:</h4>
+                    <ul class="product-share">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                    <hr />
+                    @Html.Raw(Model.Detail)
+                </div>
+            </div>
+        </div> <!-- /container -->
+        <!-- Carousel Navigation -->
+    </div>
+</div>
+<!-- /row -->
+<!-- /container -->
+<!-- end home page slider -->
+<!-- Some spacing 😉 -->
+<!-- Carousel wrapper -->
+@*<div class="single-product-img">
+        <img src="~/Public/images/products/@Model.Images" alt="">
+    </div>*@
+
+<!-- end single product -->
+<!-- more products -->
+<div class="more-products mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3 class="font-monospace"><span class="orange-text">Sản phẩm</span> cùng loại</h3>
+                    <p>@*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.*@</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var product in ViewBag.ListOtherProduct)
+            {<div class="col-lg-4 col-md-6 text-center">
+
+                    <div class="single-product-item">
+                        <div class="product-image bg-image hover-zoom">
+                            <a href="@product.Slug"><img src="~/Public/images/products/@product.Images" alt=""></a>
+                        </div>
+                        <h5 class="font-monospace"> @product.Name</h5>
+                        @if (product.Price != product.PriceSale)
+                        {
+                            <span class="text-danger">
+                                <del>
+                                    Giá gốc: @string.Format("{0:0,0}", product.Price)
+                                    VNĐ
+                                </del>
+                            </span>
+                            <p class="product-price single-product-pricing">
+                                @string.Format("{0:0,0}", product.PriceSale)
+                                <sup>VNĐ</sup>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="product-price single-product-pricing">
+                                @string.Format("{0:0,0}", product.Price)
+                                <sup>VNĐ</sup>
+                            </p>
+                        }
+                        <a href="javascript:(0)" data-id="@product.Id" class="addToCartMore cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<!-- end more products -->
+@section footer{
+    <!-- MDB -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+
+    <script src="~/Public/js/DetailPrdStyle.js"></script>
+
+}

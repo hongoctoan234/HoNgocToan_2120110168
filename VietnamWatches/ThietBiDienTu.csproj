@@ -1,0 +1,1441 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A4FD1EDE-08A6-4B24-B0AE-F7E963847484}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VietnamWatches</RootNamespace>
+    <AssemblyName>VietnamWatches</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress>false</Use64BitIISExpress>
+    <IISExpressSSLPort>44375</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\newOrder.html" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Public\admin\chart\apexcharts.css" />
+    <Content Include="Public\admin\chart\apexcharts.js" />
+    <Content Include="Public\admin\css\bootstrap.min.css" />
+    <Content Include="Public\admin\css\jquery.dataTables.min.css" />
+    <Content Include="Public\admin\css\style.css" />
+    <Content Include="Public\admin\dist\css\adminlte.css" />
+    <Content Include="Public\admin\dist\css\adminlte.min.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.components.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.core.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.light.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.light.min.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.pages.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Public\admin\dist\img\AdminLTELogo.png" />
+    <Content Include="Public\admin\dist\img\avatar.png" />
+    <Content Include="Public\admin\dist\img\avatar2.png" />
+    <Content Include="Public\admin\dist\img\avatar3.png" />
+    <Content Include="Public\admin\dist\img\avatar4.png" />
+    <Content Include="Public\admin\dist\img\avatar5.png" />
+    <Content Include="Public\admin\dist\img\boxed-bg.jpg" />
+    <Content Include="Public\admin\dist\img\boxed-bg.png" />
+    <Content Include="Public\admin\dist\img\credit\american-express.png" />
+    <Content Include="Public\admin\dist\img\credit\cirrus.png" />
+    <Content Include="Public\admin\dist\img\credit\mastercard.png" />
+    <Content Include="Public\admin\dist\img\credit\paypal.png" />
+    <Content Include="Public\admin\dist\img\credit\paypal2.png" />
+    <Content Include="Public\admin\dist\img\credit\visa.png" />
+    <Content Include="Public\admin\dist\img\default-150x150.png" />
+    <Content Include="Public\admin\dist\img\icons.png" />
+    <Content Include="Public\admin\dist\img\photo1.png" />
+    <Content Include="Public\admin\dist\img\photo2.png" />
+    <Content Include="Public\admin\dist\img\photo3.jpg" />
+    <Content Include="Public\admin\dist\img\photo4.jpg" />
+    <Content Include="Public\admin\dist\img\prod-1.jpg" />
+    <Content Include="Public\admin\dist\img\prod-2.jpg" />
+    <Content Include="Public\admin\dist\img\prod-3.jpg" />
+    <Content Include="Public\admin\dist\img\prod-4.jpg" />
+    <Content Include="Public\admin\dist\img\prod-5.jpg" />
+    <Content Include="Public\admin\dist\img\user1-128x128.jpg" />
+    <Content Include="Public\admin\dist\img\user2-160x160.jpg" />
+    <Content Include="Public\admin\dist\img\user3-128x128.jpg" />
+    <Content Include="Public\admin\dist\img\user4-128x128.jpg" />
+    <Content Include="Public\admin\dist\img\user5-128x128.jpg" />
+    <Content Include="Public\admin\dist\img\user6-128x128.jpg" />
+    <Content Include="Public\admin\dist\img\user7-128x128.jpg" />
+    <Content Include="Public\admin\dist\img\user8-128x128.jpg" />
+    <Content Include="Public\admin\dist\js\adminlte.js" />
+    <Content Include="Public\admin\dist\js\adminlte.min.js" />
+    <Content Include="Public\admin\dist\js\demo.js" />
+    <Content Include="Public\admin\dist\js\pages\dashboard.js" />
+    <Content Include="Public\admin\dist\js\pages\dashboard2.js" />
+    <Content Include="Public\admin\dist\js\pages\dashboard3.js" />
+    <Content Include="Public\admin\img\testimonial-1.jpg" />
+    <Content Include="Public\admin\img\testimonial-2.jpg" />
+    <Content Include="Public\admin\img\user.jpg" />
+    <Content Include="Public\admin\js\jquery.dataTables.min.js" />
+    <Content Include="Public\admin\js\main.js" />
+    <Content Include="Public\admin\lib\chart\chart.min.js" />
+    <Content Include="Public\admin\lib\easing\easing.js" />
+    <Content Include="Public\admin\lib\easing\easing.min.js" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="Public\admin\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="Public\admin\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="Public\admin\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="Public\admin\lib\tempusdominus\css\tempusdominus-bootstrap-4.css" />
+    <Content Include="Public\admin\lib\tempusdominus\css\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Public\admin\lib\tempusdominus\js\moment-timezone.min.js" />
+    <Content Include="Public\admin\lib\tempusdominus\js\moment.min.js" />
+    <Content Include="Public\admin\lib\tempusdominus\js\tempusdominus-bootstrap-4.js" />
+    <Content Include="Public\admin\lib\tempusdominus\js\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Public\admin\lib\waypoints\links.php" />
+    <Content Include="Public\admin\lib\waypoints\waypoints.min.js" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap.css" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.js" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Public\assets\css\all.min.css" />
+    <Content Include="Public\assets\css\animate.css" />
+    <Content Include="Public\assets\css\magnific-popup.css" />
+    <Content Include="Public\assets\css\main.css" />
+    <Content Include="Public\assets\css\meanmenu.min.css" />
+    <Content Include="Public\assets\css\owl.carousel.css" />
+    <Content Include="Public\assets\css\responsive.css" />
+    <Content Include="Public\assets\css\scss\pages\_404.css" />
+    <Content Include="Public\assets\img\1.jpg" />
+    <Content Include="Public\assets\img\a.jpg" />
+    <Content Include="Public\assets\img\abt.jpg" />
+    <Content Include="Public\assets\img\avaters\avatar1.png" />
+    <Content Include="Public\assets\img\avaters\avatar2.png" />
+    <Content Include="Public\assets\img\avaters\avatar3.png" />
+    <Content Include="Public\assets\img\breadcrumb-bg.jpg" />
+    <Content Include="Public\assets\img\company-logos\1.png" />
+    <Content Include="Public\assets\img\company-logos\2.png" />
+    <Content Include="Public\assets\img\company-logos\3.png" />
+    <Content Include="Public\assets\img\company-logos\4.png" />
+    <Content Include="Public\assets\img\company-logos\5.png" />
+    <Content Include="Public\assets\img\favicon.png" />
+    <Content Include="Public\assets\img\feature-bg.jpg" />
+    <Content Include="Public\assets\img\hero-bg-2.jpg" />
+    <Content Include="Public\assets\img\hero-bg-3.jpg" />
+    <Content Include="Public\assets\img\hero-bg.jpg" />
+    <Content Include="Public\assets\img\homepage-bg-pattern.png" />
+    <Content Include="Public\assets\img\latest-news\news-bg-1.jpg" />
+    <Content Include="Public\assets\img\latest-news\news-bg-2.jpg" />
+    <Content Include="Public\assets\img\latest-news\news-bg-3.jpg" />
+    <Content Include="Public\assets\img\latest-news\news-bg-4.jpg" />
+    <Content Include="Public\assets\img\latest-news\news-bg-5.jpg" />
+    <Content Include="Public\assets\img\latest-news\news-bg-6.jpg" />
+    <Content Include="Public\assets\img\logo.png" />
+    <Content Include="Public\assets\img\products\product-img-1.jpg" />
+    <Content Include="Public\assets\img\products\product-img-2.jpg" />
+    <Content Include="Public\assets\img\products\product-img-3.jpg" />
+    <Content Include="Public\assets\img\products\product-img-4.jpg" />
+    <Content Include="Public\assets\img\products\product-img-5.jpg" />
+    <Content Include="Public\assets\img\products\product-img-6.jpg" />
+    <Content Include="Public\assets\img\team\team-1.jpg" />
+    <Content Include="Public\assets\img\team\team-2.jpg" />
+    <Content Include="Public\assets\img\team\team-3.jpg" />
+    <Content Include="Public\assets\js\form-validate.js" />
+    <Content Include="Public\assets\js\jquery-1.11.3.min.js" />
+    <Content Include="Public\assets\js\jquery.countdown.js" />
+    <Content Include="Public\assets\js\jquery.isotope-3.0.6.min.js" />
+    <Content Include="Public\assets\js\jquery.magnific-popup.min.js" />
+    <Content Include="Public\assets\js\jquery.meanmenu.min.js" />
+    <Content Include="Public\assets\js\main.js" />
+    <Content Include="Public\assets\js\owl.carousel.min.js" />
+    <Content Include="Public\assets\js\sticker.js" />
+    <Content Include="Public\assets\js\waypoints.js" />
+    <Content Include="Public\assets\webfonts\fa-brands-400.svg" />
+    <Content Include="Public\assets\webfonts\fa-regular-400.svg" />
+    <Content Include="Public\assets\webfonts\fa-solid-900.svg" />
+    <Content Include="Public\css\ButtonCss.css" />
+    <Content Include="Public\css\DetailPrdStyle.css" />
+    <Content Include="Public\css\LayoutSite.css" />
+    <Content Include="Public\css\magiczoomplus.css" />
+    <Content Include="Public\css\OrderTracking.css" />
+    <Content Include="Public\css\selectOption.css" />
+    <Content Include="Public\images\sliders\big_ben_clock_tower_light_trails_night-wallpaper-1920x1080.jpg" />
+    <Content Include="Public\images\sliders\old_clock-wallpaper-1920x1080.jpg" />
+    <Content Include="Public\images\sliders\old_clock_mechanism-wallpaper-1920x1080.jpg" />
+    <Content Include="Public\js\bootstrap-filestyle.js" />
+    <Content Include="Public\js\bootstrap-filestyle.min.js" />
+    <Content Include="Public\js\DetailPrdStyle.js" />
+    <Content Include="Public\js\magiczoomplus.js" />
+    <Content Include="Public\mdb\css\mdb.dark.min.css" />
+    <Content Include="Public\mdb\css\mdb.dark.rtl.min.css" />
+    <Content Include="Public\mdb\css\mdb.min.css" />
+    <Content Include="Public\mdb\css\mdb.rtl.min.css" />
+    <Content Include="Public\mdb\img\mdb-favicon.ico" />
+    <Content Include="Public\mdb\js\mdb.min.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\alert.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\base-component.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\button.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\carousel.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\collapse.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\data.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\event-handler.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\manipulator.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\selector-engine.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dropdown.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\modal.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\offcanvas.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\popover.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\scrollspy.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\tab.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\toast.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\tooltip.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\alert.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\base-component.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\button.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\carousel.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\collapse.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\dom\data.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\dom\event-handler.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\dom\manipulator.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\dom\selector-engine.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\dropdown.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\modal.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\offcanvas.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\popover.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\scrollspy.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\tab.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\toast.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\tooltip.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\util\backdrop.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\util\component-functions.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\util\focustrap.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\util\index.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\util\sanitizer.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\mdb-prefix\util\scrollbar.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\alert.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\base-component.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\button.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\carousel.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\collapse.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\dom\data.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\dom\event-handler.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\dom\manipulator.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\dom\selector-engine.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\dropdown.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\modal.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\offcanvas.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\popover.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\scrollspy.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\tab.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\toast.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\tooltip.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\util\backdrop.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\util\component-functions.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\util\focustrap.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\util\index.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\util\sanitizer.js" />
+    <Content Include="Public\mdb\src\js\bootstrap\src\util\scrollbar.js" />
+    <Content Include="Public\mdb\src\js\free\alert.js" />
+    <Content Include="Public\mdb\src\js\free\button.js" />
+    <Content Include="Public\mdb\src\js\free\carousel.js" />
+    <Content Include="Public\mdb\src\js\free\dropdown.js" />
+    <Content Include="Public\mdb\src\js\free\input.js" />
+    <Content Include="Public\mdb\src\js\free\modal.js" />
+    <Content Include="Public\mdb\src\js\free\popover.js" />
+    <Content Include="Public\mdb\src\js\free\range.js" />
+    <Content Include="Public\mdb\src\js\free\ripple.js" />
+    <Content Include="Public\mdb\src\js\free\scrollspy.js" />
+    <Content Include="Public\mdb\src\js\free\tab.js" />
+    <Content Include="Public\mdb\src\js\free\toast.js" />
+    <Content Include="Public\mdb\src\js\free\tooltip.js" />
+    <Content Include="Public\mdb\src\js\mdb.free.js" />
+    <Content Include="Public\mdb\src\js\mdb\dom\data.js" />
+    <Content Include="Public\mdb\src\js\mdb\dom\event-handler.js" />
+    <Content Include="Public\mdb\src\js\mdb\dom\manipulator.js" />
+    <Content Include="Public\mdb\src\js\mdb\dom\selector-engine.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\handlers\click-rail.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\handlers\drag-thumb.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\handlers\keyboard.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\handlers\mouse-wheel.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\handlers\touch.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\index.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\lib\class-names.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\lib\css.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\lib\dom.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\lib\event-manager.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\lib\util.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\process-scroll-diff.js" />
+    <Content Include="Public\mdb\src\js\mdb\perfect-scrollbar\update-geometry.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\focusTrap.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\index.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\keycodes.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\sanitizer.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\scrollbar.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\stack.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\touch\index.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\touch\swipe.js" />
+    <Content Include="Public\mdb\src\js\mdb\util\touch\touchUtil.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Areas\Admin\Views\Coupon\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Coupon\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Coupon\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Coupon\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Coupon\Index.cshtml" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
+    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\ckeditor\CHANGES.html" />
+    <Content Include="Scripts\ckeditor\ckeditor.asp" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.pack" />
+    <Content Include="Areas\Admin\Views\Dashboard\Chart.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Trash.cshtml" />
+    <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_basic_source.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_php4.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_php5.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_source.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\images\spacer.gif" />
+    <Content Include="Scripts\ckeditor\INSTALL.html" />
+    <Content Include="Scripts\ckeditor\lang\af.js" />
+    <Content Include="Scripts\ckeditor\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\lang\bn.js" />
+    <Content Include="Scripts\ckeditor\lang\bs.js" />
+    <Content Include="Scripts\ckeditor\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\lang\es.js" />
+    <Content Include="Scripts\ckeditor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\lang\id.js" />
+    <Content Include="Scripts\ckeditor\lang\is.js" />
+    <Content Include="Scripts\ckeditor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\lang\ka.js" />
+    <Content Include="Scripts\ckeditor\lang\km.js" />
+    <Content Include="Scripts\ckeditor\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\lang\ms.js" />
+    <Content Include="Scripts\ckeditor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\lang\th.js" />
+    <Content Include="Scripts\ckeditor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\lang\_languages.js" />
+    <Content Include="Scripts\ckeditor\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\LICENSE.html" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\adobeair\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\ajax\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\bbcode\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Scripts\ckeditor\plugins\docprops\dialogs\docprops.js" />
+    <Content Include="Scripts\ckeditor\plugins\docprops\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Scripts\ckeditor\plugins\iframedialog\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.gif" />
+    <Content Include="Scripts\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Scripts\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Scripts\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\pastetext\dialogs\pastetext.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\dialogs\placeholder.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\placeholder.gif" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\stylesheetparser\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\styles\styles\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\tableresize\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\uicolor.gif" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\yui.css" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\yui.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Scripts\ckeditor\plugins\xml\plugin.js" />
+    <Content Include="Scripts\ckeditor\skins\kama\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\kama\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\kama\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\icons_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\toolbar_start.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\kama\templates.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\icons_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\office2003\templates.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\icons_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\toolbar_start.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
+    <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\jquery-1.6.3.js" />
+    <Content Include="Scripts\jquery-1.6.3.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PostController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SliderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Common\MailHelper.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
+    <Compile Include="Controllers\GioiThieuController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\LienHeController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\TimKiemController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Librarys\CartItem.cs" />
+    <Compile Include="Librarys\CusInfo.cs" />
+    <Compile Include="Librarys\XCart.cs" />
+    <Compile Include="Librarys\XCustomer.cs" />
+    <Compile Include="Librarys\XMessage.cs" />
+    <Compile Include="Librarys\XString.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Message.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Slider\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductIMG\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductIMG\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductIMG\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductIMG\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductIMG\Index.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Views\Shared\_LayoutSite.cshtml" />
+    <Content Include="Views\Site\Index.cshtml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Public\assets\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Public\assets\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Public\assets\css\scss\base\_mixins.scss" />
+    <Content Include="Public\assets\css\scss\base\_typography.scss" />
+    <Content Include="Public\assets\css\scss\base\_variables.scss" />
+    <Content Include="Public\assets\css\scss\common\_common.scss" />
+    <Content Include="Public\assets\css\scss\common\_footer.scss" />
+    <Content Include="Public\assets\css\scss\common\_header.scss" />
+    <Content Include="Public\assets\css\scss\common\_hover.scss" />
+    <Content Include="Public\assets\css\scss\main.scss" />
+    <Content Include="Public\assets\css\scss\pages\_404.scss" />
+    <Content Include="Public\assets\css\scss\pages\_about.scss" />
+    <Content Include="Public\assets\css\scss\pages\_contact.scss" />
+    <Content Include="Public\assets\css\scss\pages\_shop.scss" />
+    <Content Include="Public\assets\css\scss\prepros-6.config" />
+    <Content Include="Public\assets\css\scss\sections\_about.scss" />
+    <Content Include="Public\assets\css\scss\sections\_cart-banner.scss" />
+    <Content Include="Public\assets\css\scss\sections\_hero.scss" />
+    <Content Include="Public\assets\css\scss\sections\_list.scss" />
+    <Content Include="Public\assets\css\scss\sections\_news.scss" />
+    <Content Include="Public\assets\css\scss\sections\_shop-banner.scss" />
+    <Content Include="Public\assets\css\scss\sections\_testimonials.scss" />
+    <Content Include="Public\assets\webfonts\fa-brands-400.eot" />
+    <Content Include="Public\assets\webfonts\fa-brands-400.eot_" />
+    <Content Include="Public\assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="Public\assets\webfonts\fa-brands-400.woff" />
+    <Content Include="Public\assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="Public\assets\webfonts\fa-regular-400.eot" />
+    <Content Include="Public\assets\webfonts\fa-regular-400.eot_" />
+    <Content Include="Public\assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="Public\assets\webfonts\fa-regular-400.woff" />
+    <Content Include="Public\assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="Public\assets\webfonts\fa-solid-900.eot" />
+    <Content Include="Public\assets\webfonts\fa-solid-900.eot_" />
+    <Content Include="Public\assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="Public\assets\webfonts\fa-solid-900.woff" />
+    <Content Include="Public\assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="Public\admin\lib\owlcarousel\LICENSE" />
+    <Content Include="Public\admin\scss\bootstrap.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\bootstrap-utilities.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_floating-labels.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_form-check.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_form-control.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_form-range.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_form-select.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_form-text.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_input-group.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_labels.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\forms\_validation.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_clearfix.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_colored-links.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_position.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_ratio.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_stretched-link.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_text-truncation.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_color-scheme.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_container.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_table-variants.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_utilities.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\utilities\_api.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_accordion.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_alert.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_badge.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_button-group.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_buttons.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_card.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_carousel.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_close.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_containers.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_forms.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_functions.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_grid.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_helpers.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_images.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_list-group.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_mixins.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_modal.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_nav.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_navbar.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_offcanvas.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_pagination.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_popover.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_progress.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_reboot.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_root.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_spinners.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_tables.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_toasts.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_transitions.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_type.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_utilities.scss" />
+    <Content Include="Public\admin\scss\bootstrap\scss\_variables.scss" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Public\admin\dist\css\adminlte.css.map" />
+    <Content Include="Public\admin\dist\css\adminlte.min.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.light.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.light.min.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Public\admin\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Public\admin\dist\js\.eslintrc.json" />
+    <Content Include="Public\admin\dist\js\adminlte.js.map" />
+    <Content Include="Public\admin\dist\js\adminlte.min.js.map" />
+    <Content Include="Views\Site\Home.cshtml" />
+    <Content Include="Views\Site\Product.cshtml" />
+    <Content Include="Views\Site\ProductCategory.cshtml" />
+    <Content Include="Views\Site\HomeProduct.cshtml" />
+    <Content Include="Views\Site\ProductDetail.cshtml" />
+    <Content Include="Views\Site\Post.cshtml" />
+    <Content Include="Views\Site\PostTopic.cshtml" />
+    <Content Include="Views\Site\PostPage.cshtml" />
+    <Content Include="Views\Site\Error404.cshtml" />
+    <Content Include="Public\mdb\css\mdb.dark.min.css.map" />
+    <Content Include="Public\mdb\css\mdb.dark.rtl.min.css.map" />
+    <Content Include="Public\mdb\css\mdb.min.css.map" />
+    <Content Include="Public\mdb\css\mdb.rtl.min.css.map" />
+    <Content Include="Public\mdb\js\mdb.min.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\alert.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\base-component.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\button.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\carousel.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\collapse.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\data.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\event-handler.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\manipulator.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dom\selector-engine.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\dropdown.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\modal.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\offcanvas.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\popover.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\scrollspy.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\tab.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\toast.js.map" />
+    <Content Include="Public\mdb\src\js\bootstrap\dist\tooltip.js.map" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\bootstrap-grid.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\bootstrap-reboot.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\bootstrap-utilities.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\bootstrap.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_floating-labels.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_form-check.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_form-control.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_form-range.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_form-select.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_form-text.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_input-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_labels.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\forms\_validation.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_clearfix.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_colored-links.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_position.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_ratio.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_stacks.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_stretched-link.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_text-truncation.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_visually-hidden.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\helpers\_vr.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_alert.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_backdrop.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_border-radius.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_box-shadow.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_breakpoints.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_buttons.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_caret.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_clearfix.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_color-scheme.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_container.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_deprecate.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_forms.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_gradients.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_grid.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_image.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_list-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_lists.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_pagination.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_reset-text.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_resize.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_table-variants.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_text-truncate.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_transition.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_utilities.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\mixins\_visually-hidden.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\utilities\_api.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\vendor\_rfs.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_accordion.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_alert.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_badge.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_breadcrumb.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_button-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_buttons.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_card.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_carousel.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_close.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_containers.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_dropdown.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_forms.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_functions.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_grid.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_helpers.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_images.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_list-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_mixins.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_modal.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_nav.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_navbar.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_offcanvas.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_pagination.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_placeholders.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_popover.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_progress.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_reboot.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_root.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_spinners.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_tables.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_toasts.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_tooltip.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_transitions.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_type.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_utilities.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap-rtl-fix\_variables.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\bootstrap-grid.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\bootstrap-reboot.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\bootstrap-utilities.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\bootstrap.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_floating-labels.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_form-check.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_form-control.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_form-range.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_form-select.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_form-text.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_input-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_labels.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\forms\_validation.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_clearfix.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_colored-links.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_position.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_ratio.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_stacks.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_stretched-link.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_text-truncation.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_visually-hidden.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\helpers\_vr.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_alert.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_backdrop.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_buttons.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_caret.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_color-scheme.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_container.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_deprecate.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_forms.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_gradients.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_grid.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_image.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_list-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_lists.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_pagination.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_resize.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_table-variants.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_transition.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_utilities.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\mixins\_visually-hidden.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\utilities\_api.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\vendor\_rfs.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_accordion.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_alert.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_badge.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_breadcrumb.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_button-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_buttons.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_card.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_carousel.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_close.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_containers.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_dropdown.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_forms.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_functions.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_grid.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_helpers.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_images.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_list-group.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_mixins.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_modal.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_nav.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_navbar.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_offcanvas.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_pagination.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_placeholders.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_popover.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_progress.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_reboot.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_root.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_spinners.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_tables.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_toasts.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_tooltip.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_transitions.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_type.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_utilities.scss" />
+    <Content Include="Public\mdb\src\scss\bootstrap\_variables.scss" />
+    <Content Include="Public\mdb\src\scss\custom\_styles.scss" />
+    <Content Include="Public\mdb\src\scss\custom\_variables.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_form-check.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_form-control.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_form-file.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_form-range.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_form-select.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_input-group.scss" />
+    <Content Include="Public\mdb\src\scss\free\forms\_validation.scss" />
+    <Content Include="Public\mdb\src\scss\free\mixins\_buttons.scss" />
+    <Content Include="Public\mdb\src\scss\free\mixins\_ripple.scss" />
+    <Content Include="Public\mdb\src\scss\free\mixins\_table-variants.scss" />
+    <Content Include="Public\mdb\src\scss\free\_accordion.scss" />
+    <Content Include="Public\mdb\src\scss\free\_alert.scss" />
+    <Content Include="Public\mdb\src\scss\free\_badge.scss" />
+    <Content Include="Public\mdb\src\scss\free\_breadcrumb.scss" />
+    <Content Include="Public\mdb\src\scss\free\_button-group.scss" />
+    <Content Include="Public\mdb\src\scss\free\_buttons.scss" />
+    <Content Include="Public\mdb\src\scss\free\_card.scss" />
+    <Content Include="Public\mdb\src\scss\free\_carousel.scss" />
+    <Content Include="Public\mdb\src\scss\free\_close.scss" />
+    <Content Include="Public\mdb\src\scss\free\_colors.scss" />
+    <Content Include="Public\mdb\src\scss\free\_deprecated.scss" />
+    <Content Include="Public\mdb\src\scss\free\_dropdown.scss" />
+    <Content Include="Public\mdb\src\scss\free\_flag.scss" />
+    <Content Include="Public\mdb\src\scss\free\_functions.scss" />
+    <Content Include="Public\mdb\src\scss\free\_images.scss" />
+    <Content Include="Public\mdb\src\scss\free\_list-group.scss" />
+    <Content Include="Public\mdb\src\scss\free\_mixins.scss" />
+    <Content Include="Public\mdb\src\scss\free\_modal.scss" />
+    <Content Include="Public\mdb\src\scss\free\_nav.scss" />
+    <Content Include="Public\mdb\src\scss\free\_navbar.scss" />
+    <Content Include="Public\mdb\src\scss\free\_pagination.scss" />
+    <Content Include="Public\mdb\src\scss\free\_popover.scss" />
+    <Content Include="Public\mdb\src\scss\free\_progress.scss" />
+    <Content Include="Public\mdb\src\scss\free\_range.scss" />
+    <Content Include="Public\mdb\src\scss\free\_reboot.scss" />
+    <Content Include="Public\mdb\src\scss\free\_ripple.scss" />
+    <Content Include="Public\mdb\src\scss\free\_root.scss" />
+    <Content Include="Public\mdb\src\scss\free\_scrollspy.scss" />
+    <Content Include="Public\mdb\src\scss\free\_shadows.scss" />
+    <Content Include="Public\mdb\src\scss\free\_tables.scss" />
+    <Content Include="Public\mdb\src\scss\free\_toasts.scss" />
+    <Content Include="Public\mdb\src\scss\free\_tooltip.scss" />
+    <Content Include="Public\mdb\src\scss\free\_type.scss" />
+    <Content Include="Public\mdb\src\scss\free\_utilities.scss" />
+    <Content Include="Public\mdb\src\scss\free\_variables.scss" />
+    <Content Include="Public\mdb\src\scss\mdb.free.scss" />
+    <Content Include="Views\Module\MainMenu.cshtml" />
+    <Content Include="Views\Module\MainMenuSub1.cshtml" />
+    <Content Include="Views\Module\MainMenuSub2.cshtml" />
+    <Content Include="Views\Module\SlideShow.cshtml" />
+    <Content Include="Views\Module\OurNews.cshtml" />
+    <Content Include="Views\Module\ListCategory.cshtml" />
+    <Content Include="Views\Module\BreadCrumb.cshtml" />
+    <Content Include="Views\Module\ListCatProduct.cshtml" />
+    <Content Include="Views\Module\ListPostProduct.cshtml" />
+    <Content Include="Views\Module\ListSupProduct.cshtml" />
+    <Content Include="Views\Site\ProductSupplier.cshtml" />
+    <Content Include="Views\Module\MenuFooter.cshtml" />
+    <Content Include="Views\Site\PostDetail.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\Module\SlideDetailPrd.cshtml" />
+    <Content Include="Views\KhachHang\DangNhap.cshtml" />
+    <Content Include="Views\GioHang\ThanhToan.cshtml" />
+    <Content Include="Views\KhachHang\DangKi.cshtml" />
+    <Content Include="Views\KhachHang\ThongKeMuaHang.cshtml" />
+    <Content Include="Views\KhachHang\DatHangThanhCong.cshtml" />
+    <Content Include="Views\Site\HoNgocToan.cshtml" />
+    <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\KhachHang\ThongTinCaNhan.cshtml" />
+    <Content Include="Views\Module\Comments.cshtml" />
+    <Content Include="Views\TimKiem\Index.cshtml" />
+    <Content Include="Views\Module\FillPrice.cshtml" />
+    <Content Include="Views\KhachHang\InfoOrderClick.cshtml" />
+    <Content Include="Views\Module\ConfigFooter.cshtml" />
+    <Content Include="Views\LienHe\Index.cshtml" />
+    <Content Include="Views\Site\TatCaNhaCungCap.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Models\" />
+    <Folder Include="Public\images\posts\" />
+    <Folder Include="Public\images\products\" />
+    <Folder Include="Public\images\suppliers\" />
+    <Folder Include="Public\images\users\" />
+    <Folder Include="Views\GioiThieu\" />
+    <Folder Include="Views\Rating\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyClass\MyClass.csproj">
+      <Project>{fc93eff6-15a0-4dfa-9611-15c59e110968}</Project>
+      <Name>MyClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64095</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44375/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

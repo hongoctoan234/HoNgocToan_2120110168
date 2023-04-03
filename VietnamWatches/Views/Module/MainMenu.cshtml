@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MyClass.Models.Menu>
+<nav class="main-menu">
+    <ul>
+        @foreach (var menu in Model)
+        {
+            @Html.Action("MainMenuSub", "Module", new { @id = menu.Id })
+        }
+        <!-- menu start -->
+        <li>
+            <div class="header-icons text-lg-right">
+                <ul style=" display: inline-table;">
+                    <li style=""><a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a></li>
+                    <li style=""><a class="shopping-cart" href="~/gio-hang"><i class="fas fa-shopping-cart"></i></a></li>
+
+                    <li style="">
+                        @if (!Session["UserCustomer"].Equals(""))
+                        {
+                            <a href="#"><i class="fas fa-user"></i> @Session["FullNameCustomer"]</a>
+                            <ul class="sub-menu">
+                                <li><a href="~/thong-tin-ca-nhan">Thông tin cá nhân</a></li>
+                                <li><a href="~/thong-ke-mua-hang">Thống kê mua hàng</a></li>
+                                <li><a href="~/logout">Đăng xuất</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <a href="#"><i class="fas fa-user"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="~/login">Đăng nhập</a></li>
+                                <li><a href="~/register">Đăng kí</a></li>
+                            </ul>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </li>
+        
+    </ul>
+</nav>
+<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+<div class="mobile-menu"></div>
+@using (Html.BeginForm("DoReSearch", "TimKiem", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <!-- search area -->
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3 class="font-monospace">Tìm kiếm ngay:</h3>
+                            <input name="searchString" type="text" placeholder="Từ khoá">
+                            <button type="submit">Xác nhận <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search area -->
+}

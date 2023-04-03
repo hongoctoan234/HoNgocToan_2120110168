@@ -1,0 +1,290 @@
+﻿@model IEnumerable<CartItem>
+@{
+    ViewBag.Title = "Thanh Toán";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@{
+    var userCus = ViewBag.User;
+}
+
+@section header{
+    <style>
+        .input-focus-effect {
+            position: relative;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+            .input-focus-effect input {
+                padding: 2.5rem 1rem 1rem;
+                border: 1px solid transparent;
+                display: block;
+                width: 100%;
+                border-radius: 8px;
+                transition: border 0.25s linear;
+                background-color: transparent;
+                outline: none;
+                color: white;
+                font-size: 12px;
+            }
+
+                .input-focus-effect input:focus {
+                    border-color: #2979ff;
+                }
+
+                    .input-focus-effect input:focus + label,
+                    .input-focus-effect input:not(:placeholder-shown) + label {
+                        transform: translateY(-5px);
+                        top: 1rem;
+                    }
+
+            .input-focus-effect label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: #2979ff;
+                transition: 0.25s linear;
+                font-size: 1.2rem;
+            }
+    </style>
+}
+@Html.Action("BreadCrumb", "Module")
+
+<!-- check out section -->
+<div class="checkout-section mt-100 mb-150">
+    <div class="container">
+        @if (Model != null)
+        {
+            using (Html.BeginForm("DatMua", "GioHang", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkout-accordion-wrap">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card single-accordion">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0 font-monospace">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" aria-expanded="true" data-target="#collapseOne" aria-controls="collapseOne">
+                                                Thông tin người đặt hàng
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" aria-expanded="true" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="billing-address-form">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputEmail4">Họ và tên</label>
+                                                        <input type="text" class="form-control" placeholder="@userCus.FullName" readonly>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputPassword4">Email</label>
+                                                        <input type="email" class="form-control" placeholder="@userCus.Email" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputAddress">Địa chỉ</label>
+                                                    <input type="text" class="form-control" placeholder="@userCus.Address" readonly>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-8">
+                                                        <label for="inputCity">Số điện thoại</label>
+                                                        <input type="text" class="form-control" placeholder="@userCus.Phone" readonly>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputZip">Giới tính</label>
+                                                        @if (userCus.Gender == 1)
+                                                        {
+                                                            <input type="text" class="form-control" placeholder="Nam" readonly>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" class="form-control" placeholder="Nữ" readonly>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card single-accordion">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0 font-monospace">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Thông tin người nhận hàng
+                                            </button>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" aria-expanded="false" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="billing-address-form">
+                                                <div class="billing-address-form">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputEmail4">Họ và tên</label>
+                                                            <input name="deliveryName" type="text" class="form-control" placeholder="">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputPassword4">Email</label>
+                                                            <input name="deliveryEmail" type="email" class="form-control" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-5">
+                                                            <label for="inputCity">Số điện thoại</label>
+                                                            <input name="deliveryPhone" type="text" class="form-control" placeholder="">
+                                                        </div>
+                                                        <div class="form-group col-md-7">
+                                                            <label for="inputAddress">Địa chỉ</label>
+                                                            <input name="deliveryAddress" type="text" class="form-control" placeholder="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="mb-3">
+                                                            <label for="validationTextarea">Ghi chú</label>
+                                                            <textarea name="deliveryNote" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card single-accordion">
+                                    <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0 font-monospace">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Lưu ý
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="card-details">
+                                                <p>Vì tình hình dịch covid vẫn còn đang hiện hữu, cửa hàng có thể sẽ giao hàng trễ hơn dự kiến từ 3 tới 5 ngày. Rất xin lỗi quý khách hàng về điều khoản này.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="order-details-wrap">
+                            <table class="order-details">
+                                @{
+                                    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                }
+                                @{ decimal tongtien = 0;}
+                                @{ int tongsanpham = 0;}
+                                <thead>
+                                    <tr>
+                                        <th>Chi tiết đơn hàng</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="order-details-body">
+                                    @foreach (var userInfor in Model)
+                                    {
+                                        <tr>
+                                            <td style="width:50%;">@userInfor.NameProduct</td>
+                                            <td class="text-center">@userInfor.QtyBuy</td>
+                                            <td class="text-right">@String.Format(info, "{0:c00}", @userInfor.PriceBuy)</td>
+                                        </tr>
+                                        tongtien += userInfor.Amount;
+                                        tongsanpham += userInfor.QtyBuy;
+                                    }
+                                </tbody>
+
+                                <tbody class="checkout-details">
+                                    <tr class="border border-info text-white bg-opacity-10" style="background-color: #fd7e14;">
+                                        <td>Tổng tiền</td>
+                                        <td class="text-center">@tongsanpham</td>
+                                        <td class="text-right">@String.Format(info, "{0:c00}", tongtien)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phí giao hàng</td>
+                                        @if (tongtien >= 500000)
+                                        {
+                                            <td class="text-center">0</td>
+                                            <td>Bạn được miễn phí giao hàng với đơn hàng lớn hơn 500.000₫</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center">1</td>
+                                            <td class="text-right">@String.Format(info, "{0:c00}", 30000)</td>
+
+                                            tongtien += 30000;
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>Tổng thanh toán</td>
+                                        <td></td>
+                                        <td class="text-right">@String.Format(info, "{0:c00}", tongtien)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="cart-buttons" style="text-align: right;">
+                                <span class="text-danger">
+                                    @ViewBag.Error
+                                </span>
+                                <input class="submitSendReq btn btn-sm btn-info boxed-btn mb-1 text-white" name="clickBuyOrder" type="submit" value="Đặt Hàng">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="full-height-section error-section">
+                <div class="full-height-tablecell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2 text-center">
+                                <div class="error-text">
+                                    <i class="far fa-sad-tear"></i>
+                                    <h3 class="font-monospace"><span class="orange-text font-monospace">GIỎ HÀNG</span> CỦA BẠN ĐANG RỖNG</h3>
+                                    <p>Hãy quay lại và lựa chọn sản phẩm cho bạn</p>
+                                    <a href="~/tat-ca-san-pham" class="boxed-btn">Quay lại trang mua hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end error section -->
+        }
+    </div>
+</div>
+<!-- end check out section -->
+@section footer{
+
+    @*<script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendMail() {
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "bachhoatphcm.info@gmail.com",
+                Password: "wqqsugcuqcijsfaj",
+                To: 'lmlh.hitu@gmail.com',
+                From: "bachhoatphcm.info@gmail.com",
+                Subject: "Đơn hàng mới",
+                Body: "And this is the body"
+            }).then(
+                message => alert(message)
+            );
+        }
+    </script>
+}*@ 
+}

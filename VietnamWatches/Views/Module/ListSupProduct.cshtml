@@ -1,0 +1,10 @@
+﻿
+@model IEnumerable<MyClass.Models.Supplier>
+
+<h4 class="font-monospace"> Danh mục nhà phân phối </h4>
+<ul>
+    @foreach (var supplier in Model)
+    {
+        <li><a href="~/@supplier.Slug">@supplier.Name</a></li>
+    }
+</ul>

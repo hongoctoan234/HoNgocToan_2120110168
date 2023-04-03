@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@section header{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+}
+@Html.Action("BreadCrumb", "Module")
+
+@using (Html.BeginForm("Contact", "LienHe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="container bg-light">
+        <div class="p-3">
+            <div class="row">
+                <div class="col-md-8 p-md-1">
+                    <h3 class="text-uppercase " style="color:#cd1818">Liên hệ với chúng tôi</h3>
+                    <form>
+                        <span class="text-danger">
+                            @ViewBag.Error
+                        </span>
+                        <div class="card-body">
+                            <div class="billing-address-form">
+                                <div class="form-group">
+                                    <label for="inputAddress">Tên hiển thị</label>
+                                    <input id="textUsername" name="fullname" type="text" class="form-control" placeholder="" autofocus required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Email</label>
+                                        <input id="textEmail" name="email" type="email" class="form-control" placeholder="" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputAddress">Số điện thoại</label>
+                                        <input id="textUsername" name="phone" type="text" class="form-control" placeholder="" autofocus required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail4">Tiêu đề</label>
+                                    <input id="textFullName" name="subject" type="text" class="form-control" placeholder="" required>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="billing-address-form">
+                                        <div class="form-group">
+                                            <textarea name="noidung" id="comment" cols="52" rows="5" placeholder="Cảm nhận của bạn"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input class="btn btn-sm btn-info boxed-btn ml-lg-5 mb-1 text-white" onclick="myFunction()" name="clickUpdate" type="submit" value="Gửi ý kiến">
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-form-wrap">
+                        <div class="contact-form-box">
+                            <h4 class="font-monospace"><i class="fas fa-map"></i> Vị trí của hàng</h4>
+                            <p>63/49 đường số 10 <br> Phước Long B, Tp.Thủ Đức <br> Tp.Hồ Chí Minh</p>
+                        </div>
+                        <div class="contact-form-box">
+                            <h4 class="font-monospace"><i class="far fa-clock"></i> Thời gian hoạt động</h4>
+                            <p>Thứ 2 - Thứ 6: 8 to 9 PM <br> Thứ 7- Chủ Nhật: 10 to 6 PM </p>
+                        </div>
+                        <div class="contact-form-box">
+                            <h4 class="font-monospace"><i class="fas fa-address-book"></i> Liên hệ</h4>
+                            <p>Phone: 0896414627 <br> Email: toan24032002@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- find our location -->
+<div class="find-location blue-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p> <i class="fas fa-map-marker-alt"></i> Vị trí của chúng tôi</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end find our location -->
+<!-- google map section -->
+<div class="embed-responsive embed-responsive-21by9">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.660167716375!2d106.77657971471888!3d10.837297392280263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527168d52a62d%3A0xcd7b872bcf604066!2zNjMsIDQ5IMSQxrDhu51uZyAxMCwgVMSDbmcgTmjGoW4gUGjDuiBCLCBRdeG6rW4gOSwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1670354480637!5m2!1svi!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" class="embed-responsive-item"></iframe>
+</div>
+<!-- end google map section -->
+
+@section footer{
+    <script>
+        function myFunction() {
+            Swal.fire('Gửi ý kiến thành công!!!')
+    </script>
+}

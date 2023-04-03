@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@section header{
+    <style>
+        .input-focus-effect {
+            position: relative;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+            .input-focus-effect input {
+                padding: 2.5rem 1rem 1rem;
+                border: 1px solid transparent;
+                display: block;
+                width: 100%;
+                border-radius: 8px;
+                transition: border 0.25s linear;
+                background-color: transparent;
+                outline: none;
+                color: white;
+                font-size: 12px;
+            }
+
+                .input-focus-effect input:focus {
+                    border-color: #2979ff;
+                }
+
+                    .input-focus-effect input:focus + label,
+                    .input-focus-effect input:not(:placeholder-shown) + label {
+                        transform: translateY(-5px);
+                        top: 1rem;
+                    }
+
+            .input-focus-effect label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: #2979ff;
+                transition: 0.25s linear;
+                font-size: 1.2rem;
+            }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script charset="utf-8" type="text/javascript">
+    $(function () {
+        $(".doLoginSubmit").click(function () {
+            var data = {
+                "useridForm": $("#textusername").val(),
+                "passwordForm": $("#textpassword").val()
+            };
+            //lấy username và pass
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DoLogin", "KhachHang")',
+                data: JSON.stringify(data) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            title: 'font-monospace',
+                        },
+                        buttonsStyling: false
+                    })
+                    if (data.Success) {
+                        location.href = "/";
+                        swalWithBootstrapButtons.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: data.Message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                    else {
+                        swalWithBootstrapButtons.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: data.Message,
+                            showConfirmButton: false
+                        });
+                    }
+                },
+                error: function (data) {
+                    swalWithBootstrapButtons.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Lỗi trong khi kiểm tra đăng nhập!',
+                    })
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+}
+@Html.Action("BreadCrumb", "Module")
+<!-- login form -->
+@*@using (Html.BeginForm("DoLogin", "KhachHang", FormMethod.Post))
+    {*@
+<div class="contact-from-section mt-100 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="form-title">
+                    <h2 class="font-monospace">ĐĂNG NHẬP</h2>
+                    <p>Hãy đăng nhập trước khi tiếp tục mua hàng! Nếu bạn chưa có tài khoản hãy <a href="~/register">click vào đây</a>. </p>
+                </div>
+                <div id="form_status"></div>
+                <div class="contact-form">
+                    <span class="text-danger">
+                        @ViewBag.Error
+                    </span>
+                    <div class="input-focus-effect mt-lg-1">
+                        <input class="text-black border" name="username" id="textusername" type="text" placeholder=" " autofocus />
+                        <label class="text-info">Tên đăng nhập</label>
+                    </div>
+                    <div class="input-focus-effect mt-lg-1">
+                        <input class="text-black border" name="password" id="textpassword" type="password" placeholder=" " />
+                        <label class="text-info">Mật khẩu</label>
+                    </div>
+                    <br />
+                    <a href="javascript:(0)" data-id="" class="doLoginSubmit cart-btn"><i class="fas fa-user-alt"></i> Đăng nhập</a>
+                    @*<input class="btn btn-sm btn-info boxed-btn mt-lg-3 text-white" name="doLoginSubmit" type="submit" value="">*@
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-form-wrap">
+                    <div class="contact-form-box">
+                        <h4 class="font-monospace"><i class="fas fa-map"></i> Vị trí của hàng</h4>
+                        <p>63/49 đường số 10 <br> Phước Long B, Tp.Thủ Đức <br> Tp.Hồ Chí Minh</p>
+                    </div>
+                    <div class="contact-form-box">
+                        <h4 class="font-monospace"><i class="far fa-clock"></i> Thời gian hoạt động</h4>
+                        <p>Thứ 2 - Thứ 6: 8 to 9 PM <br> Thứ 7- Chủ Nhật: 10 to 6 PM </p>
+                    </div>
+                    <div class="contact-form-box">
+                        <h4 class="font-monospace"><i class="fas fa-address-book"></i> Liên hệ</h4>
+                        <p>Phone: 0896414627<br> Email: toan24032002@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contact form -->
+@* } *@
+<!-- find our location -->
+<div class="find-location blue-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p> <i class="fas fa-map-marker-alt"></i> Vị trí của chúng tôi</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end find our location -->
+<!-- google map section -->
+<div class="embed-responsive embed-responsive-21by9">
+    <iframe src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.660167716375!2d106.77657971471888!3d10.837297392280263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527168d52a62d%3A0xcd7b872bcf604066!2zNjMsIDQ5IMSQxrDhu51uZyAxMCwgVMSDbmcgTmjGoW4gUGjDuiBCLCBRdeG6rW4gOSwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1670355674425!5m2!1svi!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" class="embed-responsive-item"></iframe>
+</div>
+<!-- end google map section -->

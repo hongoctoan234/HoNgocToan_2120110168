@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MyClass.Models.Slider>
+
+<!-- home page slider -->
+<div class="homepage-slider">
+    <!-- single home slider -->
+    @{ int index = 0;}
+    @foreach (var slider in Model)
+    {
+        if (index == 0)
+        {
+            <div class="single-homepage-slider" style="background-image: url(../Public/images/sliders/@slider.Img);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-7 offset-lg-1 offset-xl-0">
+                            <div class="hero-text">
+                                <div class="hero-text-tablecell">
+                                    <p class="subtitle">@slider.Name</p>
+                                    <h1 class="font-monospace">@slider.Detail</h1>
+                                    <div class="hero-btns">
+                                        <a href="@slider.Link" class="boxed-btn font-monospace">Bộ Sưu Tập</a>
+                                        <a href="~/lien-he" class="bordered-btn font-monospace">Liên hệ Ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <!-- single home slider -->
+            <div class="single-homepage-slider" style="background-image: url(../Public/images/sliders/@slider.Img);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1 text-center">
+                            <div class="hero-text">
+                                <div class="hero-text-tablecell">
+                                    <p class="subtitle">@slider.Name</p>
+                                    <h1>@slider.Detail</h1>
+                                    <div class="hero-btns">
+                                        <a href="@slider.Link" class="boxed-btn font-monospace">Mặc Hàng Hot</a>
+                                        <a href="~/lien-he" class="bordered-btn font-monospace">Liên hệ Ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        index++;
+    }
+    <!-- single home slider -->
+</div>
+<!-- end home page slider -->

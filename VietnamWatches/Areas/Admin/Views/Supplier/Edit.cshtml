@@ -1,0 +1,104 @@
+﻿@model MyClass.Models.Supplier
+
+@{
+    ViewBag.Title = "Cập nhật nhà cung cấp";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Supplier", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CreatedAt)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.Img)
+
+
+    <div class="form-horizontal my-2 mx-3">
+        <h4>Chỉnh sửa - Nhà cung cấp</h4>
+        <div class="row">
+            <div class="col col-md-10">
+                <a href="@Url.Action("Index", "Supplier")" class="btn btn-sm btn-danger my-2"><i class="fas fa-arrow-circle-left"></i>  Về danh sách</a>
+            </div>
+            <div class="col col-md-2 text-right">
+                <button type="submit" value="Create" class="btn btn-success"><i class="fas fa-save"></i>   Cập nhật [Lưu]</button>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Tên nhà cung cấp <span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Email<span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Số liên hệ<span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <label for="floatingInput">
+                                <label>Địa chỉ<span class="text-danger">*</span></label>
+                            </label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+                    <div class="mb-3">
+                        <label>Vị trí</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Orders, (SelectList)ViewBag.ListOrder, "Chọn vị trí ", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Orders, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Chọn hình ảnh</label>
+                        <input class="form-control" type="file" id="formFile" name="Img">
+                    </div>
+                    <div class="mb-3">
+                        <label>Trạng thái</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Xuất bản", Value = "1" }, new SelectListItem { Text = "Không xuất bản", Value = "2" } }, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

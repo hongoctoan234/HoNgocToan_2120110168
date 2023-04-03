@@ -1,0 +1,85 @@
+﻿
+@model IEnumerable<MyClass.Models.Rating>
+@{
+    var slugPrd = ViewBag.SlugPrd;
+    int idPrd = ViewBag.IdPrd;
+}
+@section header{
+
+}
+<div class="comments-list-wrap">
+    <h3 class="comment-count-title font-monospace">Bình luận mới nhất:</h3>
+    <div class="comment-list">
+        @foreach (var rating in Model)
+        {
+            <div class="single-comment-body">
+                <div class="comment-user-avater">
+                    @if (rating.UserId !=0)
+                    {
+                        <img src="~/Public/images/users/@Html.Action("ImgComment", "User", new { userId = rating.UserId })" class="img-fluid" style="width:120px; height:60px;" alt="ImgName" />
+
+                    }
+                </div>
+                <div class="comment-text-body">
+                    <h4>@rating.UserName<span class="comment-date"> @rating.CreatedAt</span></h4>
+                    <p>@rating.DetailRating</p>
+                </div>
+            </div>
+        }
+        @*<div class="single-comment-body">
+                <div class="comment-user-avater">
+                    <img src="assets/img/avaters/avatar2.png" alt="">
+                </div>
+                <div class="comment-text-body">
+                    <h4>Addy Aoe <span class="comment-date">May 12, 2020</span> <a href="#">reply</a></h4>
+                    <p>Nunc risus ex, tempus quis purus ac, tempor consequat ex. Vivamus sem magna, maximus at est id, maximus aliquet nunc. Suspendisse lacinia velit a eros porttitor, in interdum ante faucibus Suspendisse lacinia velit a eros porttitor, in interdum ante faucibus.</p>
+                </div>
+            </div>*@
+    </div>
+</div>
+@using (Html.BeginForm("DoComment", "Rating", new { idProduct = idPrd , slugProduct= slugPrd }, FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+
+    <div class="comment-template">
+        <h4 class="font-monospace">Hãy đánh giá sản phẩm này</h4>
+        <div class="p-md-1">
+            <form>
+                <div class="card-body">
+                    @if (Session["UserCustomer"].Equals(""))
+                    {
+                        <div class="billing-address-form">
+                            <div class="form-group">
+                                <label for="inputAddress">Tên hiển thị</label>
+                                <input id="textUsername" name="username" type="text" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">Email</label>
+                                <input id="textPassword" name="email" type="email" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="comment" id="comment" cols="52" rows="5" placeholder="Cảm nhận của bạn"></textarea>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <h5 class="font-monospace" for="inputAddress">Tên hiển thị: @Session["UserCustomer"]</h5>
+                        </div>
+                        <div class="billing-address-form">
+                            <div class="form-group">
+                                <textarea name="comment" id="comment" cols="52" rows="5" placeholder="Cảm nhận của bạn"></textarea>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+                @*<a href="javascript:(0)" data-id="" class="doRegisterSubmit cart-btn ml-lg-5 mb-1"><i class="fas fa-user-alt"></i> Đăng ký</a>*@
+
+                <input class="btn btn-sm btn-info boxed-btn ml-lg-5 mb-1 text-white" onclick="myFunction()" name="clickUpdate" type="submit" value="Đăng tải">
+            </form>
+        </div>
+    </div>
+}

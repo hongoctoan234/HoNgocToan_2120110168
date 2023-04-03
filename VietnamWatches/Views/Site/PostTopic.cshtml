@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MyClass.Models.PostInfo>
+    @{ 
+        var topic = ViewBag.Topic;
+    }
+@{
+    ViewBag.Title =topic.Name;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@Html.Action("BreadCrumb", "Module")
+
+<!-- latest news -->
+<div class="latest-news mt-100 mb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text font-monospace">@topic.Name</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var post in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-latest-news">
+                        <a href="@post.Slug"><div class="latest-news-bg" style="background-image: url(../Public/images/posts/@post.Images);"></div></a>
+                        <div class="news-text-box">
+                            <h3 class="font-monospace"><a href="@post.Slug">@post.Title</a></h3>
+                            <p class="blog-meta">
+                                <span class="author"><i class="fas fa-user"></i> @post.TopicName</span>
+                                <span class="date"><i class="fas fa-calendar"></i> @post.CreatedAt</span>
+                            </p>
+                            <p class="excerpt">@XString.str_Limit(post.MetaDesc, 100)</p>
+                            <a href="@post.Slug" class="read-more-btn">xem thêm... <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination-wrap">
+                            <ul>
+                                <li><a href="#">Prev</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a class="active" href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end latest news -->

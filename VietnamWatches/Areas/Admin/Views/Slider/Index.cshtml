@@ -1,0 +1,165 @@
+﻿@model IEnumerable<MyClass.Models.Slider>
+@{
+    ViewBag.Title = "Tất cả slider";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    <link href="~/Public/admin/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('.changeStatus').click(function () {
+                var model = {};
+                model.Id = $(this).attr("data-id");
+                var dataId = model.Id;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Status", "Slider")',
+                    data: JSON.stringify(model),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (res) {
+                        if (res == 2) {
+                            $('#status_' + dataId).removeClass('btn-success').addClass('btn-primary');
+                            $('#iconStatus_' + dataId).removeClass('fa-toggle-on').addClass('fa-toggle-off');
+                            $("#themeChangeStatus").css({
+                                display: "inline-block",
+                                visibility: "initial",
+                            });
+                            function initialSetup() {
+                                if (document.getElementById("themeChangeStatus") !== null) {
+                                    document.getElementById('themeChangeStatus').style.visibility = 'initial';
+                                    setTimeout(function () {
+                                        document.getElementById('themeChangeStatus').style.visibility = 'hidden';
+                                        document.getElementById('themeChangeStatus').style.display = 'none';
+                                    }, 2000);
+                                }
+                            }
+                            initialSetup();
+                        } else {
+                            $('#status_' + dataId).removeClass('btn-primary').addClass('btn-success');
+                            $('#iconStatus_' + dataId).removeClass('fa-toggle-off').addClass('fa-toggle-on');
+                            $("#themeChangeStatus").css({
+                                display: "inline-block",
+                                visibility: "initial"
+                            });
+                            function initialSetup() {
+                                if (document.getElementById("themeChangeStatus") !== null) {
+                                    document.getElementById('themeChangeStatus').style.visibility = 'initial';
+                                    setTimeout(function () {
+                                        document.getElementById('themeChangeStatus').style.visibility = 'hidden';
+                                        document.getElementById('themeChangeStatus').style.display = 'none';
+                                    }, 2000);
+                                }
+                            }
+                            initialSetup();
+                        }
+                    },
+                error: function () {
+                    alert("Lỗi trong khi Thay đổi trạng thái!");
+                }
+            });
+            return false;
+        });
+        });
+    </script>
+}
+@section footer{
+    <script src="~/Public/admin/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<h2 class="my-2 mx-2">Tất cả slider </h2>
+
+<p class="my-2 mx-2">
+    <div class="row">
+        <div class="col-lg-8 text-lg-start mt-lg-3" style="margin-bottom: 3%;">
+            <a href="@Url.Action("Create", "Slider")" class="btn btn-sm btn-success"><i class="far fa-plus-square"></i>  Thêm</a>
+            <a href="@Url.Action("Trash", "Slider")" class="btn btn-sm btn-danger"><i class="fas fa-trash-restore"></i>  Thùng rác</a>
+        </div>
+        <div class="col-lg-4">
+            <div id="themeChangeStatus" style="visibility:hidden; display:none;" class="alert alert-primary alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>Thay đổi trạng thái thành công!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div id="themeDelItem" style="visibility:hidden; display:none;" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>Chuyển vào thùng rác thành công!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</p>
+<div class="container-fluid pt-2 px-2">
+    @Html.Partial("Message")
+    <table class="table table-bordered table-hover table-striped" id="myTable">
+        <thead>
+            <tr class="text-center">
+                <th style="width:10px;">
+                    ID
+                </th>
+                <th>
+                    Tên slider
+                </th>
+                <th style="width: 70px;">
+                    Hình ảnh
+                </th>
+                <th>
+                    Vị trí
+                </th>
+                <th>
+                    Đường dẫn
+                </th>
+                <th style="width:180px;">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <img src="~/Public/images/sliders/@item.Img" class="img-fluid" alt="ImgName" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Link)
+                    </td>
+                    <td>
+                        @if (item.Status == 1)
+                        {
+                            @*<a href="@Url.Action("Status", "Slider", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-toggle-on"></i> </a>*@
+                            <a href="javascript:(0)" id="status_@item.Id" data-id="@item.Id" class="changeStatus btn btn-sm btn-success mx-1 my-1 @item.Id">
+                                <i id="iconStatus_@item.Id" class="fas fa-toggle-on @item.Id"></i>
+                            </a>
+
+                        }
+                        else
+                        {
+                            @*<a href="@Url.Action("Status", "Slider", new { id = item.Id })" class="btn btn-sm btn-primary mx-1 my-1"><i class="fas fa-toggle-off"></i> </a>*@
+                            <a href="javascript:(0)" id="status_@item.Id" data-id="@item.Id" class="changeStatus btn btn-sm btn-primary mx-1 my-1 @item.Id">
+                                <i id="iconStatus_@item.Id" class="fas fa-toggle-off @item.Id"></i>
+                            </a>
+
+                        }
+                        <a href="@Url.Action("Edit", "Slider", new { id = item.Id })" class="btn btn-sm btn-info mx-1"><i class="fas fa-edit"></i></a>
+                        <a href="@Url.Action("Details", "Slider", new { id = item.Id })" class="btn btn-sm btn-success mx-1 my-1"><i class="fas fa-info-circle"></i></a>
+                        <a href="@Url.Action("DelTrash", "Slider", new { id = item.Id })" class="btn btn-sm btn-danger mx-1 my-1"><i class="fas fa-trash"></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

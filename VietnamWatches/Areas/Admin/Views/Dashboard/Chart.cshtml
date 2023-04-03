@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Thống kê";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    var product = ViewBag.ListProduct;
+}
+@section header{
+    <link href="~/Public/admin/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Public/admin/chart/apexcharts.css" rel="stylesheet" />
+    <style>
+        #chart_container {
+            width: 500px;
+        }
+    </style>
+}
+<div class="container-fluid pt-2 px-2">
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 class="font-monospace">Thống kê số lượng sản phẩm theo danh mục:</h5>
+            <div id="chart_container">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h5 class="font-monospace">Thống kê số lượng sản phẩm tồn kho:</h5>
+            <table class="table table-bordered table-hover table-striped" id="myTable">
+                <thead>
+                    <tr class="text-center">
+                        <th style="width:10px;">
+                            ID
+                        </th>
+                        <th>
+                            Tên sản phẩm
+                        </th>
+                        <th style="width: 70px;">
+                            Hình ảnh
+                        </th>
+                        <th>
+                            Số lượng còn lại
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in product)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                <img src="~/Public/images/products/@item.Images" class="img-fluid" alt="ImgName" />
+                            </td>
+
+                            <td>
+                                @item.Number
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <h5 class="font-monospace">Thống kê doanh thu:</h5>
+            <div id="chart">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section footer{
+
+    <script src="~/Scripts/chart.min.js"></script>
+    <script src="~/Scripts/jquery-1.6.3.min.js"></script>
+    <script>
+        var repArray= @Html.Raw(Json.Encode(ViewBag.REP));
+        var ages=@Html.Raw(Json.Encode(ViewBag.AGES));
+      
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ages,
+                datasets: [{
+                    label: '#Số lượng',
+                    data: repArray,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+
+    <script src="~/Public/admin/chart/apexcharts.js"></script>
+
+    <script>
+        var orderArray= @Html.Raw(Json.Encode(ViewBag.AmountOrder));
+        var timeOrder=@Html.Raw(Json.Encode(ViewBag.TimeOrder));
+        console.log(timeOrder);
+        //var options = {
+        //    series: [{
+        //        name: 'Doanh Thu',
+        //        data: orderArray
+        //    }],
+        //    chart: {
+        //        height: 350,
+        //        type: 'area'
+        //    },
+        //    dataLabels: {
+        //        enabled: false
+        //    },
+        //    stroke: {
+        //        curve: 'smooth'
+        //    },
+        //    xaxis: {
+        //        type: 'datetime',
+        //        categories: timeOrder
+        //    },
+        //    yaxis: {
+        //        title: {
+        //            text: 'Tổng tiền (VNĐ)'
+        //        }
+        //    },
+        //    tooltip: {
+        //        x: {
+        //            format: 'dd/MM/yy HH:mm'
+        //        },
+        //    },
+        //};
+        //var chart = new ApexCharts(document.querySelector("#chart"), options);
+        //chart.render();
+    </script>
+}
