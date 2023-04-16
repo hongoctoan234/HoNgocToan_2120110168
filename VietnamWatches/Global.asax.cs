@@ -16,14 +16,14 @@ namespace ThietBiDienTu
         }
         protected void Session_Start()
         {
-            //L?u thông tin --> Trang qu?n tr?
+            //Luu thông tin --> Trang quan tri
             Session["UserId"] = "";
             Session["UserAdmin"] = "";
             Session["FullName"] = "";
             //Session["ImageAdmin"] = "";
             Session["MyCart"] = "";
 
-            //L?u thông tin --> Trang ng??i dùng
+            //Luu thông tin --> Trang nguoi
             Session["CustomerId"] = "";
             Session["UserCustomer"] = "";
             Session["FullNameCustomer"] = "";
