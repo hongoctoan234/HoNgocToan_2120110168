@@ -1,9 +1,7 @@
 ﻿using MyClass.DAO;
-using MyClass.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
@@ -52,7 +50,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
             var orderId = listOrder.Select(m => m.Id).Distinct();
             foreach (var item in orderId)
             {
-                repOrder.Add(listOrder.Where(x => x.OrderId == item).Sum(i=>i.Amount));
+                repOrder.Add(listOrder.Where(x => x.OrderId == item).Sum(i => i.Amount));
             }
 
             var listOrder1 = orderDAO.getListJoin("Index");

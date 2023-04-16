@@ -1,8 +1,5 @@
-﻿using MyClass.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace ThietBiDienTu
 {
@@ -107,18 +104,18 @@ namespace ThietBiDienTu
             int vt = arrVt;
             //foreach (CartItem cartItem in listCart)
             //{
-                //if (arrQty[vt].Equals("0"))
-                //{
-                //    this.DeleteCart(cartItem.ProductId);
-                //}
-                //else
-                //{
-                //    listCart[vt].QtyBuy = Int16.Parse(arrQty[vt]);
-                //    listCart[vt].Amount = listCart[vt].PriceBuy * listCart[vt].QtyBuy;
-                //}
-                listCart[vt].QtyBuy = arrQty;
-                listCart[vt].Amount = listCart[vt].PriceBuy * listCart[vt].QtyBuy;
-                //vt++;
+            //if (arrQty[vt].Equals("0"))
+            //{
+            //    this.DeleteCart(cartItem.ProductId);
+            //}
+            //else
+            //{
+            //    listCart[vt].QtyBuy = Int16.Parse(arrQty[vt]);
+            //    listCart[vt].Amount = listCart[vt].PriceBuy * listCart[vt].QtyBuy;
+            //}
+            listCart[vt].QtyBuy = arrQty;
+            listCart[vt].Amount = listCart[vt].PriceBuy * listCart[vt].QtyBuy;
+            //vt++;
             //}
             System.Web.HttpContext.Current.Session["MyCart"] = listCart;
         }

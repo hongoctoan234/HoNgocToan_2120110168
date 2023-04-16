@@ -1,14 +1,11 @@
-﻿using System;
+﻿using MyClass.DAO;
+using MyClass.Models;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using MyClass.DAO;
-using MyClass.Models;
 
 namespace ThietBiDienTu.Controllers
 {
@@ -58,7 +55,7 @@ namespace ThietBiDienTu.Controllers
                 if (listCart.Where(m => m.ProductId == productId).Count() != 0)
                 {
                     //ProductId đã có trong giỏ hàng
-                    cartItem.QtyBuy+= qty;
+                    cartItem.QtyBuy += qty;
                     int vt = 0;
                     foreach (var item in listCart)
                     {

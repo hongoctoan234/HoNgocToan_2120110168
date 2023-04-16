@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ThietBiDienTu
+﻿namespace ThietBiDienTu
 {
     public class CusInfo
     {
@@ -24,12 +19,12 @@ namespace ThietBiDienTu
             this.Phone = phone;
             this.Gender = gender;
             this.Password = pass;
-            
+
         }
         public CusInfo(string img)
         {
             this.Images = img;
-            
+
         }
         public CusInfo(int cusId, string fullName, string address, string phone, int gender, string pass)
         {

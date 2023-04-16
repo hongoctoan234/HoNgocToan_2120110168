@@ -1,10 +1,7 @@
 ﻿using MyClass.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyClass.DAO
 {
@@ -14,7 +11,7 @@ namespace MyClass.DAO
         //Trả về danh sách các mẫu tin
         public List<OrderDetail> getList(int? id)
         {
-            return db.OrderDetails.Where(m => m.OrderId== id).ToList();
+            return db.OrderDetails.Where(m => m.OrderId == id).ToList();
         }
         public List<OrderDetail> getList()
         {

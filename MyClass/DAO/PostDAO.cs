@@ -1,11 +1,8 @@
 ﻿using MyClass.Models;
 using PagedList;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyClass.DAO
 {
@@ -218,7 +215,7 @@ namespace MyClass.DAO
                 case "Index":
                     {
                         //Lấy ra những mẫu tin có status!=0
-                        list = db.Posts.Where(m => m.Status != 0 && m.Type == type).OrderByDescending(m=>m.CreatedAt).ToList();
+                        list = db.Posts.Where(m => m.Status != 0 && m.Type == type).OrderByDescending(m => m.CreatedAt).ToList();
                         break;
                     }
                 case "Trash":

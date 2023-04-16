@@ -1,10 +1,7 @@
 ﻿using MyClass.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyClass.DAO
 {
@@ -33,7 +30,7 @@ namespace MyClass.DAO
                     Images = p.Images
                 }
                 )
-                .Where(m => m.OptionName == optionName && m.IdProduct==id)
+                .Where(m => m.OptionName == optionName && m.IdProduct == id)
                 .ToList()
                 .Join(
                 db.Products,
@@ -41,7 +38,7 @@ namespace MyClass.DAO
                 c => c.Id,
                 (p, c) => new ProductOption_IMG
                 {
-                    ImageAvt=c.Images
+                    ImageAvt = c.Images
                 }
                 )
                 .Where(m => m.OptionName == optionName && m.IdProduct == id)

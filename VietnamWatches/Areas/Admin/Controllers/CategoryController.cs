@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MyClass.DAO;
+﻿using MyClass.DAO;
 using MyClass.Models;
+using System;
+using System.Net;
+using System.Web.Mvc;
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
 {
@@ -51,7 +46,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Category category)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyClass.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MyClass.Models;
-using MyClass.DAO;
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
 {
@@ -29,19 +25,19 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
             //string password = XString.ToMD5(field["password"]);
             User user = db.Users.Where(m => m.Status == 1 && m.Access == 1 && m.UserName == username && m.Password == password).FirstOrDefault();
 
-            if (user==null)
+            if (user == null)
             {
                 strError = "Thông tin đăng nhập không chính xác";
-               
+
             }
-            else 
+            else
             {
-               
-                    Session["UserId"] = user.Id;
-                    Session["UserAdmin"] = user.UserName;
-                    Session["FullName"] = user.FullName;
-                    return RedirectToAction("Index", "Dashboard");
-              
+
+                Session["UserId"] = user.Id;
+                Session["UserAdmin"] = user.UserName;
+                Session["FullName"] = user.FullName;
+                return RedirectToAction("Index", "Dashboard");
+
             }
             ViewBag.ErrorLogin = strError;
             return View();

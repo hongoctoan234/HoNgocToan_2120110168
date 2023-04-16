@@ -1,12 +1,9 @@
-﻿using System;
+﻿using MyClass.DAO;
+using MyClass.Models;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MyClass.DAO;
-using MyClass.Models;
-using PagedList.Mvc;
-using PagedList;
 
 namespace ThietBiDienTu.Controllers
 {
@@ -22,7 +19,7 @@ namespace ThietBiDienTu.Controllers
         SupplierDAO supplierDAO = new SupplierDAO();
         TopicDAO topicDAO = new TopicDAO();
         // GET: Site
-        public ActionResult Index(string slug = null , int? page=null)
+        public ActionResult Index(string slug = null, int? page = null)
         {
             TBDTDBContext db = new TBDTDBContext();
             int somau = db.Products.Count();
@@ -241,7 +238,8 @@ namespace ThietBiDienTu.Controllers
         public ActionResult Error404(string slug)
         {
             return View("Error404");
-        } public ActionResult HuyThanhCong(string slug)
+        }
+        public ActionResult HuyThanhCong(string slug)
         {
             return View("HuyThanhCong");
         }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using MyClass.DAO;
+using MyClass.Models;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MyClass.DAO;
-using MyClass.Models;
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
 {

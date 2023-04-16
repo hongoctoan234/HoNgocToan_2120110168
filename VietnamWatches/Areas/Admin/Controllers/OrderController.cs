@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using MyClass.DAO;
 using MyClass.Models;
-using MyClass.DAO;
-using System.IO;
-using ClosedXML.Excel;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
@@ -19,7 +13,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
         private TBDTDBContext db = new TBDTDBContext();
 
         OrderDAO orderDAO = new OrderDAO();
-        OrderDetailDAO orderDetailDAO  = new OrderDetailDAO();
+        OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
         // GET: Admin/Product 
         public ActionResult Index()
         {
@@ -47,7 +41,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
-             return View();
+            return View();
         }
 
         // POST: Admin/Product/Create
@@ -57,7 +51,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Order order)
         {
-             return View(order);
+            return View(order);
         }
 
         // GET: Admin/Product/Edit/5
@@ -84,7 +78,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+
             }
             TempData["message"] = new XMessage("danger", "Cập nhật thành công!");
             return View(order);
@@ -201,7 +195,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
                 TempData["message"] = new XMessage("danger", "Mẫu tin không tồn tại!");
                 return RedirectToAction("Index", "Order");
             }
-            if ((order.Status == 1)||(order.Status==2))
+            if ((order.Status == 1) || (order.Status == 2))
             {
                 order.Status = 0;
 

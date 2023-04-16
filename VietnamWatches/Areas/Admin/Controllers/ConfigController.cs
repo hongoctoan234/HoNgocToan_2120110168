@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using MyClass.DAO;
+using MyClass.Models;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MyClass.DAO;
-using MyClass.Models;
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
 {
     public class ConfigController : Controller
-{
-            private TBDTDBContext db = new TBDTDBContext();
+    {
+        private TBDTDBContext db = new TBDTDBContext();
         ConfigDAO configDAO = new ConfigDAO();
         // GET: Admin/Config
         public ActionResult Index()

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.Entity;
-using System.Drawing.Imaging;
-using System.Globalization;
+﻿using MyClass.DAO;
+using MyClass.Models;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MyClass.DAO;
-using MyClass.Models;
 
 namespace ThietBiDienTu.Areas.Admin.Controllers
 {
@@ -129,7 +123,7 @@ namespace ThietBiDienTu.Areas.Admin.Controllers
                 }
 
                 var finalString = new String(stringChars);
-           
+
                 product.MetaDesc = finalString;
                 if (!field["calenderStart"].Equals(""))
                 {

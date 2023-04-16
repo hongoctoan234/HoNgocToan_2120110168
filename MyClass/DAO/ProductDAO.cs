@@ -1,11 +1,8 @@
 ﻿using MyClass.Models;
 using PagedList;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyClass.DAO
 {
@@ -516,67 +513,67 @@ namespace MyClass.DAO
         public List<ProductInfo> getListChart()
         {
             List<ProductInfo> list = null;
-                        //Lấy ra những mẫu tin có status!=0
-                        return list = db.Products
-                            .Join(
-                db.Categorys,
-                p => p.CatId,
-                c => c.Id,
-                (p, c) => new ProductInfo
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    CatId = p.CatId,
-                    CatName = c.Name,
-                    Slug = p.Slug,
-                    SupplierId = p.SupplierId,
-                    Images = p.Images,
-                    Detail = p.Detail,
-                    Number = p.Number,
-                    Price = p.Price,
-                    PriceSale = p.PriceSale,
-                    MetaDesc = p.MetaDesc,
-                    MetaKey = p.MetaKey,
-                    CreatedBy = p.CreatedBy,
-                    CreatedAt = p.CreatedAt,
-                    UpdatedBy = p.UpdatedBy,
-                    UpdatedAt = p.UpdatedAt,
-                    SaleStart = p.SaleStart,
-                    SaleEnd = p.SaleEnd,
-                    Status = p.Status
-                }
-                ).Where(m => m.Status != 0 && m.Number != 0)
-                 .OrderBy(m => m.Number).ToList().Join(
-                db.Suppliers,
-                t => t.SupplierId,
-                c => c.Id,
-                (t, c) => new ProductInfo
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    CatId = t.CatId,
-                    CatName = t.CatName,
-                    SupplierName = c.Name,
-                    Slug = t.Slug,
-                    SupplierId = t.SupplierId,
-                    Images = t.Images,
-                    Detail = t.Detail,
-                    Number = t.Number,
-                    Price = t.Price,
-                    PriceSale = t.PriceSale,
-                    MetaDesc = t.MetaDesc,
-                    MetaKey = t.MetaKey,
-                    CreatedBy = t.CreatedBy,
-                    CreatedAt = t.CreatedAt,
-                    UpdatedBy = t.UpdatedBy,
-                    UpdatedAt = t.UpdatedAt,
-                    SaleStart = t.SaleStart,
-                    SaleEnd = t.SaleEnd,
-                    Status = t.Status
-                }
-                ).Where(m => m.Status != 0 && m.Number!=0)
-                 .OrderBy(m => m.Number).Take(10).ToList();
-          
+            //Lấy ra những mẫu tin có status!=0
+            return list = db.Products
+                .Join(
+    db.Categorys,
+    p => p.CatId,
+    c => c.Id,
+    (p, c) => new ProductInfo
+    {
+        Id = p.Id,
+        Name = p.Name,
+        CatId = p.CatId,
+        CatName = c.Name,
+        Slug = p.Slug,
+        SupplierId = p.SupplierId,
+        Images = p.Images,
+        Detail = p.Detail,
+        Number = p.Number,
+        Price = p.Price,
+        PriceSale = p.PriceSale,
+        MetaDesc = p.MetaDesc,
+        MetaKey = p.MetaKey,
+        CreatedBy = p.CreatedBy,
+        CreatedAt = p.CreatedAt,
+        UpdatedBy = p.UpdatedBy,
+        UpdatedAt = p.UpdatedAt,
+        SaleStart = p.SaleStart,
+        SaleEnd = p.SaleEnd,
+        Status = p.Status
+    }
+    ).Where(m => m.Status != 0 && m.Number != 0)
+     .OrderBy(m => m.Number).ToList().Join(
+    db.Suppliers,
+    t => t.SupplierId,
+    c => c.Id,
+    (t, c) => new ProductInfo
+    {
+        Id = t.Id,
+        Name = t.Name,
+        CatId = t.CatId,
+        CatName = t.CatName,
+        SupplierName = c.Name,
+        Slug = t.Slug,
+        SupplierId = t.SupplierId,
+        Images = t.Images,
+        Detail = t.Detail,
+        Number = t.Number,
+        Price = t.Price,
+        PriceSale = t.PriceSale,
+        MetaDesc = t.MetaDesc,
+        MetaKey = t.MetaKey,
+        CreatedBy = t.CreatedBy,
+        CreatedAt = t.CreatedAt,
+        UpdatedBy = t.UpdatedBy,
+        UpdatedAt = t.UpdatedAt,
+        SaleStart = t.SaleStart,
+        SaleEnd = t.SaleEnd,
+        Status = t.Status
+    }
+    ).Where(m => m.Status != 0 && m.Number != 0)
+     .OrderBy(m => m.Number).Take(10).ToList();
+
         }
         public List<Product> getListSearch(string seachString)
         {

@@ -1,10 +1,7 @@
 ﻿using MyClass.DAO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using MyClass.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace ThietBiDienTu.Controllers
 {
@@ -90,19 +87,19 @@ namespace ThietBiDienTu.Controllers
         public ActionResult BreadCrumb()
         {
             return View("BreadCrumb");
-        } 
+        }
         //BreadCrumb
         public ActionResult FillPrice()
         {
             return View("FillPrice");
-        } 
+        }
         public ActionResult Comments(int id)
         {
             List<Rating> list = ratingDAO.getListRatingByPrdId(id);
             Product product = productDAO.getRow(id);
             ViewBag.SlugPrd = product.Slug;
             ViewBag.IdPrd = product.Id;
-            return View("Comments",list);
+            return View("Comments", list);
         }
         //PostLastNews
         public ActionResult PostLastNews()
@@ -113,12 +110,12 @@ namespace ThietBiDienTu.Controllers
         public ActionResult MenuFooter()
         {
             List<Menu> list = menuDAO.getListByParentId("footermenu", 0);
-            return View("MenuFooter",list);
+            return View("MenuFooter", list);
         }
         public ActionResult ConfigFooter()
         {
             Config configAddress = configDAO.getRowByValue("Địa Chỉ");
-            if(configAddress!= null)
+            if (configAddress != null)
             {
                 ViewBag.ConfigAddress = configAddress.Value;
             }

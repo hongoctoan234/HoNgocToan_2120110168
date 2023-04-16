@@ -1,16 +1,13 @@
 ﻿using MyClass.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyClass.DAO
 {
     public class DetailPrdDAO
     {
-            private TBDTDBContext db = new TBDTDBContext();
+        private TBDTDBContext db = new TBDTDBContext();
 
         //
         //Trả về danh sách các mẫu tin
