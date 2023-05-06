@@ -200,7 +200,7 @@ namespace MyClass.DAO
                     .ToPagedList(pageNumber, pageSize);
             return list;
         }
-        //---------------
+        //Trả về danh sách các mẫu tin
         public List<Post> getListTrashPage()
         {
             return db.Posts.Where(m => m.Status == 0 && m.Type == "Page").OrderByDescending(m => m.CreatedAt).ToList();
