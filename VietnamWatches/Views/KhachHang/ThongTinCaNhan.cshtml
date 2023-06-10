@@ -55,7 +55,7 @@
                     else {
                         swalWithBootstrapButtons.fire({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: 'Lỗi đăng nhập !!',                            
                             text: data.Message,
                             showConfirmButton: false
                         });
@@ -65,7 +65,7 @@
                 error: function (error) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'Lỗi đăng nhập !!',                        
                         text: 'Lỗi trong khi thay đổi ảnh đại diện',
                     })
                     console.log(error);
@@ -110,7 +110,7 @@
                     else {
                         swalWithBootstrapButtons.fire({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: 'Lỗi đăng nhập !!',                         
                             text: data.Message,
                             showConfirmButton: false
                         });
@@ -119,7 +119,7 @@
                 error: function (error) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'Lỗi đăng nhập !!',                        
                         text: 'Lỗi trong khi thay đổi mật khẩu',
                     })
                 }
@@ -166,7 +166,7 @@
                     else {
                         swalWithBootstrapButtons.fire({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: 'Lỗi đăng nhập !!',
                             text: data.Message,
                             showConfirmButton: false
                         });
@@ -175,7 +175,7 @@
                 error: function (data) {
                     swalWithBootstrapButtons.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'Lỗi đăng nhập !!',
                         text: 'Lỗi trong khi kiểm tra đăng nhập!',
                     })
                 }
